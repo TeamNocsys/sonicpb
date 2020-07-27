@@ -1,0 +1,122 @@
+module sonic-interface {
+
+	yang-version 1.1;
+
+	namespace "http://github.com/Azure/sonic-interface";
+	prefix intf;
+
+	import ietf-yang-types {
+		prefix yang;
+	}
+
+	import ietf-inet-types {
+		prefix inet;
+	}
+
+	import sonic-types {
+		prefix stypes;
+		revision-date 2019-07-01;
+	}
+
+	import sonic-extension {
+		prefix ext;
+		revision-date 2019-07-01;
+	}
+
+	import sonic-port {
+		prefix port;
+		revision-date 2019-07-01;
+	}
+
+	description "INTERFACE yang Module for SONiC OS";
+
+	revision 2019-07-01 {
+		description "First Revision";
+	}
+
+	container sonic-interface {
+
+		container interface {
+
+			description "INTERFACE part of config_db.json";
+
+			list interface-list {
+
+				description "INTERFACE part of config_db.json with vrf";
+
+				key "port-name";
+
+				ext:key-regex-configdb-to-yang "^(Ethernet[0-9]+)$";
+
+				ext:key-regex-yang-to-configdb "<port-name>";
+
+				leaf port-name {
+					type leafref {
+						path /port:sonic-port/port:port/port:port-list/port:port-name;
+					}
+				}
+
+				leaf vrf-name {
+					type string {
+						pattern "Vrf[a-zA-Z0-9_-]+";
+						length 3..255;
+					}
+				}
+			}
+			/* end of INTERFACE_LIST */
+
+			list interface-ipprefix-list {
+
+				description "INTERFACE part of config_db.json with ip-prefix";
+
+				key "port-name ip-prefix";
+
+				ext:key-regex-configdb-to-yang "^(Ethernet[0-9]+)|([a-fA-F0-9:./]+)$";
+
+				ext:key-regex-yang-to-configdb "<port-name>|<ip-prefix>";
+
+				leaf port-name {
+					/* This node must be present in INTERFACE_LIST */
+					must "(current() = ../../interface-list[port-name=current()]/port-name)"
+					{
+						error-message "Must condition not satisfied, Try adding PORT: {}, Example: 'Ethernet0': {}";
+					}
+
+					type leafref {
+						path /port:sonic-port/port:port/port:port-list/port:port-name;
+					}
+				}
+
+				leaf ip-prefix {
+					type union {
+						type stypes:sonic-ip4-prefix;
+						type stypes:sonic-ip6-prefix;
+					}
+				}
+
+				leaf scope {
+					type enumeration {
+						enum global;
+						enum local;
+					}
+				}
+
+				leaf family {
+
+					/* family leaf needed for backward compatibility
+					   Both ip4 and ip6 address are string in IETF RFC 6021,
+					   so must statement can check based on : or ., family
+					   should be IPv4 or IPv6 according.
+					 */
+
+					must "(contains(../ip-prefix, ':') and current()='IPv6') or
+						(contains(../ip-prefix, '.') and current()='IPv4')";
+					type stypes:ip-family;
+				}
+			}
+			/* end of INTERFACE_IPPREFIX_LIST */
+
+		}
+		/* end of INTERFACE container */
+	}
+}

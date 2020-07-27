@@ -1,0 +1,5 @@
+# ignore all except .gitignore file
+target
+vendor
+.idea
+.DS_Store
