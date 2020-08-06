@@ -1,13 +1,20 @@
+> 配置代理
+
+```
+# go env -w GO111MODULE=on
+# go env -w GOPROXY=https://goproxy.io,direct
+```
+
 > 获取代码
 
 ```
-# go get -u github.com/TeamNocsys/sonicpb
+# GO111MODULE=off go get -u github.com/TeamNocsys/sonicpb
 ```
 
 > 下载YANG编译工具
 
 ```
-# go get -u github.com/openconfig/ygot
+# GO111MODULE=off go get -u github.com/openconfig/ygot
 ```
 
 > 将YANG模型转换成Protobuf文件

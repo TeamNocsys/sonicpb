@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export GOPATH=`go env GOPATH`
+
 find .tmp -name "*.proto" | xargs sed -i 's/^package openconfig.*;$/package openconfig;/g'
 find .tmp -name "*.proto" | xargs sed -i 's/^import "github.com.*\//import "/g'
 find .tmp -name "*.proto" | xargs sed -i 's/^import "openconfig.*\//import "/g'
