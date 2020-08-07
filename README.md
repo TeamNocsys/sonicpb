@@ -20,14 +20,23 @@
 > 将YANG模型转换成Protobuf文件
 
 ```
-# cd tools
-# go generate 
+# cd build
+# ./build.sh
+```
+
+> 配置编译环境
+
+```
+# sudo apt install -y protobuf-compiler
+# GO111MODULE=off go get -u github.com/google/protobuf
 ```
 
 > 根据Protobuf生成Java、GO和Python版本代码
 
 ```
-# ./compile_protos.sh
+# ./compile_protos_go.sh
+# ./compile_protos_java.sh
+# ./compile_protos_python.sh
 ```
 
 > 打包Jar包

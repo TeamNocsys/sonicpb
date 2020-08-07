@@ -1,13 +1,5 @@
 #!/bin/sh
 
-set -euo pipefail
-
-proto_imports="api/protobuf/openconfig"
-
-protoc -I=$proto_imports --go_out=api/protobuf/openconfig api/protobuf/openconfig/enums.proto
-protoc -I=$proto_imports --go_out=api/protobuf/openconfig api/protobuf/openconfig/sonic_acl.proto
-protoc -I=$proto_imports --go_out=api/protobuf/openconfig api/protobuf/openconfig/sonic_interface.proto
-protoc -I=$proto_imports --go_out=api/protobuf/openconfig api/protobuf/openconfig/sonic_loopback_interface.proto
-protoc -I=$proto_imports --go_out=api/protobuf/openconfig api/protobuf/openconfig/sonic_port.proto
-protoc -I=$proto_imports --go_out=api/protobuf/openconfig api/protobuf/openconfig/sonic_portchannel.proto
-protoc -I=$proto_imports --go_out=api/protobuf/openconfig api/protobuf/openconfig/sonic_vlan.proto
+export GOPATH=`go env GOPATH`
+proto_imports="api/protobuf/openconfig:${GOPATH}/src:${GOPATH}/src/github.com/google/protobuf/src"
+protoc -I=$proto_imports --go_out=api/protobuf/openconfig `find api/protobuf/openconfig -name "*.proto" ! -name "yext.proto" ! -name "ywrapper.proto" | xargs echo`
