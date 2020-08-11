@@ -3,6 +3,14 @@
 export GOPATH=`go env GOPATH`
 proto_imports="../protobuf/sonic:${GOPATH}/src:${GOPATH}/src/github.com/google/protobuf/src"
 java_output="jar/src/main/java"
+
+if [ ! -d "$java_output" ];then
+mkdir -p "$java_output"
+else 
+path="$java_output""/[^.]*"
+rm -rf $path
+fi
+
 if [ $# -eq 1 ];then
   java_output=$1
 fi
