@@ -1,0 +1,134 @@
+module sonic-lldp {
+
+    yang-version 1.1;
+
+    namespace "http://github.com/Azure/sonic-lldp";
+    prefix lldp;
+
+    import sonic-lldp-types {
+        prefix lldp-types;
+    }
+
+    description "LLDP yang Module for SONiC OS";
+
+    container sonic-lldp {
+
+        grouping lldp-config {
+
+            description "Configuration data for LLDP parameters";
+        }
+
+        grouping lldp-state {
+
+            description "Operational state data for global LLDP parameters";
+
+            leaf chassis-id {
+
+                description "Identify the chassis component of the endpoint";
+
+                type string;
+            }
+
+            leaf chassis-id-type {
+
+                description "Identify the format and source of the chassis identifier string.";
+
+                type lldp-types:chassis-id-type;
+            }
+
+            leaf system-name {
+
+                description "The system name field";
+
+                type string {
+                    length 0..255;
+                }
+            }
+
+            leaf system-description {
+
+                description "The system description field";
+
+                type string {
+                    length 0..255;
+                }
+            }
+
+            leaf port-id {
+                
+                description "Identify the port component of the endpoint";
+
+                type string;
+            }
+
+            leaf port-id-type {
+
+                description "Identify the format and source of the port identifier string";
+
+                type lldp-types:port-id-type;
+            }
+
+            leaf port-description {
+
+                description "The actual port identifier for the port which this LLDP PDU was transmited";
+
+                type string;
+            }
+
+            leaf local-port {
+
+                description "Identify the port component of local";
+
+                type string;
+            }
+
+            leaf age {
+
+                description "Age since discovery";
+
+                type uint64;
+                units "seconds";
+            }
+
+            leaf index {
+
+                description "Discovery index";
+
+                type uint32;
+            }
+        }
+
+        container lldp {
+
+            description "Top-level container for LLDP configuration and state data";
+
+            list device-list {
+
+                description "list of device, keyed by device name.";
+
+                key "device-name";
+
+                leaf device-name {
+                    type string {
+                        length 1..128;
+                    }
+                }
+
+                container config {
+
+                    description "Configuration data for lldp";
+
+                    uses lldp-config;
+                }
+
+                container state {
+
+                    description "Operational state data for lldp";
+
+                    uses lldp-state;
+                }
+            }
+        }
+    }
+
+}

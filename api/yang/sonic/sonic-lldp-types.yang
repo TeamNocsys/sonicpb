@@ -1,0 +1,111 @@
+module sonic-lldp-types {
+
+    yang-version "1.1";
+
+    namespace "http://github.com/Azure/sonic-lldp-types";
+    prefix sonic-types;
+
+    description "SONiC lldp type for yang Models of SONiC OS";
+
+    revision 2020-08-11 {
+        description "First Revision";
+    }
+
+    typedef chassis-id-type {
+        type enumeration {
+            enum CHASSIS_COMPONENT {
+                description
+                    "Chassis identifier based on the value of entPhysicalAlias
+                    object defined in IETF RFC 2737";
+            }
+            enum INTERFACE_ALIAS {
+                description
+                    "Chassis identifier based on the value of ifAlias object
+                    defined in IETF RFC 2863";
+            }
+            enum PORT_COMPONENT {
+                description
+                    "Chassis identifier based on the value of entPhysicalAlias
+                    object defined in IETF RFC 2737 for a port or backplane
+                    component";
+            }
+            enum MAC_ADDRESS {
+                description
+                    "Chassis identifier based on the value of a unicast source
+                    address (encoded in network byte order and IEEE 802.3
+                    canonical bit order), of a port on the containing chassis
+                    as defined in IEEE Std 802-2001";
+            }
+            enum NETWORK_ADDRESS {
+                description
+                    "Chassis identifier based on a network address,
+                    associated with a particular chassis.  The encoded address
+                    is composed of two fields.  The first field is a single
+                    octet, representing the IANA AddressFamilyNumbers value
+                    for the specific address type, and the second field is the
+                    network address value";
+            }
+            enum INTERFACE_NAME {
+                description
+                    "Chassis identifier based on the name of the interface,
+                    e.g., the value of ifName object defined in IETF RFC 2863";
+            }
+            enum LOCAL {
+                description
+                    "Chassis identifier based on a locally defined value";
+            }
+        }
+        description
+            "Type definition with enumerations describing the source of
+            the chassis identifier";
+        reference
+            "IEEE 802.1AB LLDP MIB";
+        }
+
+    typedef port-id-type {
+        type enumeration {
+            enum INTERFACE_ALIAS {
+                description
+                    "Chassis identifier based on the value of ifAlias object
+                    defined in IETF RFC 2863";
+            }
+            enum PORT_COMPONENT {
+                description
+                    "Port identifier based on the value of entPhysicalAlias
+                    object defined in IETF RFC 2737 for a port component";
+            }
+            enum MAC_ADDRESS {
+                description
+                    "Port identifier based on the value of a unicast source
+                    address (encoded in network byte order and IEEE 802.3
+                    canonical bit order) associated with a port";
+            }
+            enum NETWORK_ADDRESS {
+                description
+                    "Port identifier based on a network address,
+                    associated with a particular port";
+            }
+            enum INTERFACE_NAME {
+                description
+                    "Port identifier based on the name of the interface,
+                    e.g., the value of ifName object defined in IETF RFC 2863";
+            }
+            enum AGENT_CIRCUIT_ID {
+                description
+                    "Port identifer based on the circuit id in the DHCP
+                    relay agent information option as defined in IETF
+                    RFC 3046";
+            }
+            enum LOCAL {
+                description
+                    "Port identifier based on a locally defined alphanumeric
+                    string";
+            }
+        }
+        description
+            "Type definition with enumerations describing the basis of
+            the port identifier";
+        reference
+            "IEEE 802.1AB LLDP MIB";
+    }
+}

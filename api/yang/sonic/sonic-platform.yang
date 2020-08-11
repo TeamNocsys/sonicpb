@@ -1,0 +1,128 @@
+module sonic-platform{
+
+    yang-version 1.1;
+
+    namespace "http://github.com/Azure/sonic-platform";
+    prefix platform;
+
+    description "PLATFORM yang Module for SONiC OS";
+
+    revision 2020-08-10 {
+
+        description "First Revision";
+    }
+
+    grouping psu-config {
+
+        description "Configuration data for power supply components";
+
+        leaf enabled {
+
+            description "Adminsitrative control on the on/off state of the power supply unit.";
+
+            type boolean;
+            default true;
+        }
+    }
+
+    grouping platform-anchors-top {
+
+        description "platform components";
+
+        container power-supply {
+
+            description "Data for power supply components";
+
+            container config {
+ 
+                description "Configuration data for power supply components";
+
+                uses psu-config;
+            }
+
+            container state {
+
+                config false;
+
+                description "Operational state data for power supply components";
+
+                uses psu-config;
+            }
+        }
+
+        container fan {
+
+            description "Data for fan components";
+
+            container config {
+
+                description "Configuration data for fan components";
+            }
+
+            container state {
+
+                config false;
+
+                description "Operational state data for fan components";
+
+                leaf speed {
+
+                    description "Current (instantaneous) fan speed";
+
+                    type uint32;
+                    units rpm;
+                }
+            }
+        }
+
+        container temperature {
+
+            description "Data for temperature";
+
+            container config {
+
+                description "Configuration data for temperature";
+            }
+
+            container state {
+
+                config false;
+
+                description "Operational state data for temperature";
+
+                leaf instant {
+
+                    description "The instantaneous value of the statistic.";
+
+                    type decimal64 {
+                        fraction-digits 1;
+                    }
+                    units celsius;
+                }
+            }
+        }
+    }
+
+    container sonic-platform {
+
+        container platform {
+
+            description "Top-level container for the components in the system.";
+
+            list component-list {
+
+                description "List of components, keyed by component name.";
+
+                key "component-name";
+                
+                leaf component-name {
+                    type string {
+                        length 1..128;
+                    }
+                }
+
+                uses platform-anchors-top;
+            }
+        }
+    }
+}
