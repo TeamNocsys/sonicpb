@@ -18,6 +18,7 @@ $ GO111MODULE=off go get -u github.com/openconfig/ygot
 
 ```shell
 $ sudo apt install -y protobuf-compiler
+$ go get -u google.golang.org/protobuf/protoc-gen-go
 $ GO111MODULE=off go get -u github.com/google/protobuf
 ```
 

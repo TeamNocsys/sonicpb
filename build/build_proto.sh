@@ -12,7 +12,7 @@ find $output -name "*.proto" | xargs sed -i 's/^package openconfig.*;$/package s
 find $output -name "*.proto" | xargs sed -i 's/^import "github.com.*\//import "/g'
 find $output -name "*.proto" | xargs sed -i 's/^import "openconfig.*\//import "/g'
 find $output -name "*.proto" | xargs sed -i 's/openconfig\.\w*\./sonic./g'
-find $output -name "*.proto" | xargs sed -i '/^package sonic;$/a\option java_package = "com.nocsys.sonic";'
+find $output -name "*.proto" | xargs sed -i '/^package sonic;$/a\option java_package = "com.nocsys.sonic";\noption go_package = ".;sonic";'
 
 dest="../api/protobuf/sonic"
 if [ -d "$dest" ];then
