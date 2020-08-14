@@ -2,21 +2,21 @@
 // representation of a YANG schema.
 //
 // Input schema modules:
-//  - ../api/yang/sonic/sonic-interface.yang
-//  - ../api/yang/sonic/sonic-loopback-interface.yang
-//  - ../api/yang/sonic/sonic-port.yang
 //  - ../api/yang/sonic/sonic-vlan.yang
+//  - ../api/yang/sonic/sonic-lldp-types.yang
 //  - ../api/yang/sonic/sonic-extension.yang
-//  - ../api/yang/sonic/sonic-acl.yang
 //  - ../api/yang/sonic/sonic-types.yang
-//  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
-//  - ../api/yang/sonic/third_party/ietf/ietf-yang-types.yang
+//  - ../api/yang/sonic/sonic-interface.yang
+//  - ../api/yang/sonic/sonic-lldp.yang
 //  - ../api/yang/sonic/third_party/ietf/iana-if-type.yang
 //  - ../api/yang/sonic/third_party/ietf/ietf-interfaces.yang
-//  - ../api/yang/sonic/sonic-portchannel.yang
-//  - ../api/yang/sonic/sonic-lldp-types.yang
-//  - ../api/yang/sonic/sonic-lldp.yang
+//  - ../api/yang/sonic/third_party/ietf/ietf-yang-types.yang
+//  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
 //  - ../api/yang/sonic/sonic-platform.yang
+//  - ../api/yang/sonic/sonic-loopback-interface.yang
+//  - ../api/yang/sonic/sonic-portchannel.yang
+//  - ../api/yang/sonic/sonic-acl.yang
+//  - ../api/yang/sonic/sonic-port.yang
 syntax = "proto3";
 
 package sonic;
@@ -104,6 +104,13 @@ enum SonicPortAdminStatus {
   SONICPORTADMINSTATUS_UNSET = 0;
   SONICPORTADMINSTATUS_up = 1 [(yext.yang_name) = "up"];
   SONICPORTADMINSTATUS_down = 2 [(yext.yang_name) = "down"];
+}
+
+// SonicPortOperStatus represents an enumerated type generated for the YANG enumerated type oper-status.
+enum SonicPortOperStatus {
+  SONICPORTOPERSTATUS_UNSET = 0;
+  SONICPORTOPERSTATUS_up = 1 [(yext.yang_name) = "up"];
+  SONICPORTOPERSTATUS_down = 2 [(yext.yang_name) = "down"];
 }
 
 // SonicPortchannelAdminStatus represents an enumerated type generated for the YANG enumerated type admin-status.
