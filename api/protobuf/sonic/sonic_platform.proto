@@ -2,21 +2,22 @@
 // representation of a YANG schema.
 //
 // Input schema modules:
+//  - ../api/yang/sonic/sonic-acl.yang
+//  - ../api/yang/sonic/sonic-port.yang
+//  - ../api/yang/sonic/sonic-types.yang
+//  - ../api/yang/sonic/sonic-portchannel.yang
+//  - ../api/yang/sonic/sonic-platform-types.yang
+//  - ../api/yang/sonic/sonic-lldp-types.yang
+//  - ../api/yang/sonic/third_party/ietf/iana-if-type.yang
+//  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
+//  - ../api/yang/sonic/third_party/ietf/ietf-interfaces.yang
+//  - ../api/yang/sonic/third_party/ietf/ietf-yang-types.yang
+//  - ../api/yang/sonic/sonic-vlan.yang
+//  - ../api/yang/sonic/sonic-lldp.yang
 //  - ../api/yang/sonic/sonic-interface.yang
 //  - ../api/yang/sonic/sonic-loopback-interface.yang
-//  - ../api/yang/sonic/sonic-port.yang
-//  - ../api/yang/sonic/sonic-vlan.yang
-//  - ../api/yang/sonic/sonic-extension.yang
-//  - ../api/yang/sonic/sonic-acl.yang
-//  - ../api/yang/sonic/sonic-types.yang
-//  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
-//  - ../api/yang/sonic/third_party/ietf/ietf-yang-types.yang
-//  - ../api/yang/sonic/third_party/ietf/iana-if-type.yang
-//  - ../api/yang/sonic/third_party/ietf/ietf-interfaces.yang
-//  - ../api/yang/sonic/sonic-portchannel.yang
-//  - ../api/yang/sonic/sonic-lldp-types.yang
-//  - ../api/yang/sonic/sonic-lldp.yang
 //  - ../api/yang/sonic/sonic-platform.yang
+//  - ../api/yang/sonic/sonic-extension.yang
 syntax = "proto3";
 
 package sonic;
@@ -25,10 +26,14 @@ option go_package = ".;sonic";
 
 import "ywrapper.proto";
 import "yext.proto";
+import "enums.proto";
 
 message SonicPlatform {
   message Platform {
     message ComponentList {
+      message Config {
+        ywrapper.StringValue name = 230034957 [(yext.schemapath) = "/sonic-platform/platform/component-list/config/name"];
+      }
       message Fan {
         message Config {
         }
@@ -48,21 +53,62 @@ message SonicPlatform {
         Config config = 261486411 [(yext.schemapath) = "/sonic-platform/platform/component-list/power-supply/config"];
         State state = 432670092 [(yext.schemapath) = "/sonic-platform/platform/component-list/power-supply/state"];
       }
-      message Temperature {
-        message Config {
+      message Properrties {
+        message Property {
+          message Config {
+            ywrapper.StringValue name = 106125889 [(yext.schemapath) = "/sonic-platform/platform/component-list/properrties/property/config/name"];
+            oneof value {
+              bool value_bool = 177661778;
+              sint64 value_sint64 = 345068674;
+              string value_string = 489766113;
+              uint64 value_uint64 = 198363908;
+              ywrapper.Decimal64Value value_decimal64value = 166715520;
+            }
+          }
+          message State {
+            ywrapper.BoolValue configurable = 404248938 [(yext.schemapath) = "/sonic-platform/platform/component-list/properrties/property/state/configurable"];
+            ywrapper.StringValue name = 326603112 [(yext.schemapath) = "/sonic-platform/platform/component-list/properrties/property/state/name"];
+            oneof value {
+              bool value_bool = 82008711;
+              sint64 value_sint64 = 73514059;
+              string value_string = 291462160;
+              uint64 value_uint64 = 15437321;
+              ywrapper.Decimal64Value value_decimal64value = 506326749;
+            }
+          }
+          Config config = 531354373 [(yext.schemapath) = "/sonic-platform/platform/component-list/properrties/property/config"];
+          State state = 141775098 [(yext.schemapath) = "/sonic-platform/platform/component-list/properrties/property/state"];
         }
-        message State {
-          ywrapper.Decimal64Value instant = 62837115 [(yext.schemapath) = "/sonic-platform/platform/component-list/temperature/state/instant"];
+        message PropertyKey {
+          string name = 1 [(yext.schemapath) = "/sonic-platform/platform/component-list/properrties/property/name"];
+          Property property = 2;
         }
-        Config config = 337160820 [(yext.schemapath) = "/sonic-platform/platform/component-list/temperature/config"];
-        State state = 451306125 [(yext.schemapath) = "/sonic-platform/platform/component-list/temperature/state"];
+        repeated PropertyKey property = 162652912 [(yext.schemapath) = "/sonic-platform/platform/component-list/properrties/property"];
       }
+      message State {
+        message Temperature {
+          ywrapper.Decimal64Value instant = 338367711 [(yext.schemapath) = "/sonic-platform/platform/component-list/state/temperature/instant"];
+        }
+        ywrapper.StringValue hardware_version = 25730174 [(yext.schemapath) = "/sonic-platform/platform/component-list/state/hardware-version"];
+        ywrapper.StringValue mfg_date = 471181716 [(yext.schemapath) = "/sonic-platform/platform/component-list/state/mfg-date"];
+        ywrapper.StringValue mfg_name = 296561001 [(yext.schemapath) = "/sonic-platform/platform/component-list/state/mfg-name"];
+        ywrapper.StringValue part_no = 396719414 [(yext.schemapath) = "/sonic-platform/platform/component-list/state/part-no"];
+        ywrapper.StringValue serial_no = 359661251 [(yext.schemapath) = "/sonic-platform/platform/component-list/state/serial-no"];
+        ywrapper.StringValue software_version = 133159825 [(yext.schemapath) = "/sonic-platform/platform/component-list/state/software-version"];
+        Temperature temperature = 239797209 [(yext.schemapath) = "/sonic-platform/platform/component-list/state/temperature"];
+        oneof type {
+          sonic.SonicPlatformTypesSONICHARDWARECOMPONENT type_sonicplatformtypessonichardwarecomponent = 260337717;
+          sonic.SonicPlatformTypesSONICSOFTWARECOMPONENT type_sonicplatformtypessonicsoftwarecomponent = 499229608;
+        }
+      }
+      Config config = 199071417 [(yext.schemapath) = "/sonic-platform/platform/component-list/config"];
       Fan fan = 312399162 [(yext.schemapath) = "/sonic-platform/platform/component-list/fan"];
       PowerSupply power_supply = 156501850 [(yext.schemapath) = "/sonic-platform/platform/component-list/power-supply"];
-      Temperature temperature = 142631507 [(yext.schemapath) = "/sonic-platform/platform/component-list/temperature"];
+      Properrties properrties = 134974448 [(yext.schemapath) = "/sonic-platform/platform/component-list/properrties"];
+      State state = 129146638 [(yext.schemapath) = "/sonic-platform/platform/component-list/state"];
     }
     message ComponentListKey {
-      string component_name = 1 [(yext.schemapath) = "/sonic-platform/platform/component-list/component-name"];
+      string name = 1 [(yext.schemapath) = "/sonic-platform/platform/component-list/name"];
       ComponentList component_list = 2;
     }
     repeated ComponentListKey component_list = 521845684 [(yext.schemapath) = "/sonic-platform/platform/component-list"];

@@ -11,6 +11,7 @@ require (
 	github.com/envoyproxy/go-control-plane v0.9.6 // indirect
 	github.com/envoyproxy/protoc-gen-validate v0.4.0 // indirect
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e // indirect
+	github.com/golang/protobuf v1.4.2
 	github.com/google/go-cmp v0.5.1 // indirect
 	github.com/google/protobuf v3.12.3+incompatible // indirect
 	github.com/iancoleman/strcase v0.0.0-20191112232945-16388991a334 // indirect
@@ -18,7 +19,7 @@ require (
 	github.com/lyft/protoc-gen-star v0.4.15 // indirect
 	github.com/openconfig/gnmi v0.0.0-20200617225440-d2b4e6a45802 // indirect
 	github.com/openconfig/goyang v0.0.0-20200623182805-6be32aef2bcd // indirect
-	github.com/openconfig/ygot v0.8.3 // indirect
+	github.com/openconfig/ygot v0.8.3
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pkg/sftp v1.11.0 // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect
@@ -31,6 +32,7 @@ require (
 	golang.org/x/tools v0.0.0-20200725200936-102e7d357031 // indirect
 	google.golang.org/appengine v1.6.6 // indirect
 	google.golang.org/genproto v0.0.0-20200726014623-da3ae01ef02d // indirect
+	google.golang.org/protobuf v1.25.0
 	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
 	gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776 // indirect
 	rsc.io/sampler v1.99.99 // indirect
