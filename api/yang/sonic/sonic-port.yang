@@ -147,6 +147,65 @@ module sonic-port{
 				leaf oper-status {
 					type stypes:oper-status;
 				}
+
+				container counters {
+				    leaf in-octets {
+				        type uint64;
+				    }
+
+				    leaf in-pkts {
+				        type uint64;
+				    }
+
+				    leaf in-unicast-pkts {
+				        type uint64;
+				    }
+
+				    leaf in-broadcast-pkts {
+				        type uint64;
+				    }
+
+				    leaf in-multicast-pkts {
+				        type uint64;
+				    }
+
+				    leaf in-discards {
+				        type uint64;
+				    }
+
+				    leaf in-errors {
+				        type uint64;
+				    }
+
+				    leaf out-octets {
+				        type uint64;
+				    }
+
+				    leaf out-pkts {
+				        type uint64;
+				    }
+
+				    leaf out-unicast-pkts {
+				        type uint64;
+				    }
+
+				    leaf out-broadcast-pkts {
+				        type uint64;
+				    }
+
+				    leaf out-multicast-pkts {
+				        type uint64;
+				    }
+
+				    leaf out-discards {
+				        type uint64;
+				    }
+
+				    leaf out-errors {
+				        type uint64;
+				    }
+				} /* end of container COUNTERS */
+
 			} /* end of list PORT_STATE_LIST */
 
 		} /* end of container PORT */
