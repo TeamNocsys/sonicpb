@@ -98,6 +98,51 @@ module sonic-port{
 				}
 			} /* end of list PORT_LIST */
 
+			list port-state-list {
+			    config false;
+
+			    key "port-name";
+
+				leaf port-name {
+					type string {
+						length 1..128;
+					}
+				}
+
+				leaf alias {
+					type string {
+						length 1..128;
+					}
+				}
+
+				leaf description {
+					type string {
+						length 0..255;
+					}
+				}
+
+				leaf speed {
+					mandatory true;
+					type uint32 {
+						range 1..100000;
+					}
+				}
+
+				leaf mtu {
+					type uint16 {
+						range 1..9216;
+					}
+				}
+
+				leaf admin-status {
+					type stypes:admin-status;
+				}
+
+				leaf oper-status {
+					type stypes:oper-status;
+				}
+			} /* end of list PORT_STATE_LIST */
+
 		} /* end of container PORT */
 
 	} /* end of container sonic-port */
