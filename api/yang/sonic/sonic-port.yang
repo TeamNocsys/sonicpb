@@ -134,6 +134,12 @@ module sonic-port{
 					}
 				}
 
+				leaf index {
+					type uint16 {
+						range 0..256;
+					}
+				}
+
 				leaf admin-status {
 					type stypes:admin-status;
 				}
