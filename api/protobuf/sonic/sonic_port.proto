@@ -44,8 +44,25 @@ message SonicPort {
       PortList port_list = 2;
     }
     message PortStateList {
+      message Counters {
+        ywrapper.UintValue in_broadcast_pkts = 90338217 [(yext.schemapath) = "/sonic-port/port/port-state-list/counters/in-broadcast-pkts"];
+        ywrapper.UintValue in_discards = 499026598 [(yext.schemapath) = "/sonic-port/port/port-state-list/counters/in-discards"];
+        ywrapper.UintValue in_errors = 239192886 [(yext.schemapath) = "/sonic-port/port/port-state-list/counters/in-errors"];
+        ywrapper.UintValue in_multicast_pkts = 42816188 [(yext.schemapath) = "/sonic-port/port/port-state-list/counters/in-multicast-pkts"];
+        ywrapper.UintValue in_octets = 452010871 [(yext.schemapath) = "/sonic-port/port/port-state-list/counters/in-octets"];
+        ywrapper.UintValue in_pkts = 302618071 [(yext.schemapath) = "/sonic-port/port/port-state-list/counters/in-pkts"];
+        ywrapper.UintValue in_unicast_pkts = 16285847 [(yext.schemapath) = "/sonic-port/port/port-state-list/counters/in-unicast-pkts"];
+        ywrapper.UintValue out_broadcast_pkts = 215928864 [(yext.schemapath) = "/sonic-port/port/port-state-list/counters/out-broadcast-pkts"];
+        ywrapper.UintValue out_discards = 305251515 [(yext.schemapath) = "/sonic-port/port/port-state-list/counters/out-discards"];
+        ywrapper.UintValue out_errors = 166373579 [(yext.schemapath) = "/sonic-port/port/port-state-list/counters/out-errors"];
+        ywrapper.UintValue out_multicast_pkts = 533661729 [(yext.schemapath) = "/sonic-port/port/port-state-list/counters/out-multicast-pkts"];
+        ywrapper.UintValue out_octets = 459609310 [(yext.schemapath) = "/sonic-port/port/port-state-list/counters/out-octets"];
+        ywrapper.UintValue out_pkts = 76592966 [(yext.schemapath) = "/sonic-port/port/port-state-list/counters/out-pkts"];
+        ywrapper.UintValue out_unicast_pkts = 397194418 [(yext.schemapath) = "/sonic-port/port/port-state-list/counters/out-unicast-pkts"];
+      }
       sonic.SonicPortAdminStatus admin_status = 220671023 [(yext.schemapath) = "/sonic-port/port/port-state-list/admin-status"];
       ywrapper.StringValue alias = 257596125 [(yext.schemapath) = "/sonic-port/port/port-state-list/alias"];
+      Counters counters = 431401216 [(yext.schemapath) = "/sonic-port/port/port-state-list/counters"];
       ywrapper.StringValue description = 443224803 [(yext.schemapath) = "/sonic-port/port/port-state-list/description"];
       ywrapper.UintValue index = 331739769 [(yext.schemapath) = "/sonic-port/port/port-state-list/index"];
       ywrapper.UintValue mtu = 429048545 [(yext.schemapath) = "/sonic-port/port/port-state-list/mtu"];
