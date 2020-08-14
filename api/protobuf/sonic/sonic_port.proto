@@ -47,6 +47,7 @@ message SonicPort {
       sonic.SonicPortAdminStatus admin_status = 220671023 [(yext.schemapath) = "/sonic-port/port/port-state-list/admin-status"];
       ywrapper.StringValue alias = 257596125 [(yext.schemapath) = "/sonic-port/port/port-state-list/alias"];
       ywrapper.StringValue description = 443224803 [(yext.schemapath) = "/sonic-port/port/port-state-list/description"];
+      ywrapper.UintValue index = 331739769 [(yext.schemapath) = "/sonic-port/port/port-state-list/index"];
       ywrapper.UintValue mtu = 429048545 [(yext.schemapath) = "/sonic-port/port/port-state-list/mtu"];
       sonic.SonicPortOperStatus oper_status = 438817078 [(yext.schemapath) = "/sonic-port/port/port-state-list/oper-status"];
       ywrapper.UintValue speed = 221710544 [(yext.schemapath) = "/sonic-port/port/port-state-list/speed"];
