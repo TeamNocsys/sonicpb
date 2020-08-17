@@ -620,6 +620,56 @@ func (SonicPortAdminStatus) EnumDescriptor() ([]byte, []int) {
 	return file_enums_proto_rawDescGZIP(), []int{9}
 }
 
+// SonicPortOperStatus represents an enumerated type generated for the YANG enumerated type oper-status.
+type SonicPortOperStatus int32
+
+const (
+	SonicPortOperStatus_SONICPORTOPERSTATUS_UNSET SonicPortOperStatus = 0
+	SonicPortOperStatus_SONICPORTOPERSTATUS_up    SonicPortOperStatus = 1
+	SonicPortOperStatus_SONICPORTOPERSTATUS_down  SonicPortOperStatus = 2
+)
+
+// Enum value maps for SonicPortOperStatus.
+var (
+	SonicPortOperStatus_name = map[int32]string{
+		0: "SONICPORTOPERSTATUS_UNSET",
+		1: "SONICPORTOPERSTATUS_up",
+		2: "SONICPORTOPERSTATUS_down",
+	}
+	SonicPortOperStatus_value = map[string]int32{
+		"SONICPORTOPERSTATUS_UNSET": 0,
+		"SONICPORTOPERSTATUS_up":    1,
+		"SONICPORTOPERSTATUS_down":  2,
+	}
+)
+
+func (x SonicPortOperStatus) Enum() *SonicPortOperStatus {
+	p := new(SonicPortOperStatus)
+	*p = x
+	return p
+}
+
+func (x SonicPortOperStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SonicPortOperStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_enums_proto_enumTypes[10].Descriptor()
+}
+
+func (SonicPortOperStatus) Type() protoreflect.EnumType {
+	return &file_enums_proto_enumTypes[10]
+}
+
+func (x SonicPortOperStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SonicPortOperStatus.Descriptor instead.
+func (SonicPortOperStatus) EnumDescriptor() ([]byte, []int) {
+	return file_enums_proto_rawDescGZIP(), []int{10}
+}
+
 // SonicPortchannelAdminStatus represents an enumerated type generated for the YANG enumerated type admin-status.
 type SonicPortchannelAdminStatus int32
 
@@ -654,11 +704,11 @@ func (x SonicPortchannelAdminStatus) String() string {
 }
 
 func (SonicPortchannelAdminStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_enums_proto_enumTypes[10].Descriptor()
+	return file_enums_proto_enumTypes[11].Descriptor()
 }
 
 func (SonicPortchannelAdminStatus) Type() protoreflect.EnumType {
-	return &file_enums_proto_enumTypes[10]
+	return &file_enums_proto_enumTypes[11]
 }
 
 func (x SonicPortchannelAdminStatus) Number() protoreflect.EnumNumber {
@@ -667,7 +717,7 @@ func (x SonicPortchannelAdminStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SonicPortchannelAdminStatus.Descriptor instead.
 func (SonicPortchannelAdminStatus) EnumDescriptor() ([]byte, []int) {
-	return file_enums_proto_rawDescGZIP(), []int{10}
+	return file_enums_proto_rawDescGZIP(), []int{11}
 }
 
 // SonicVlanAdminStatus represents an enumerated type generated for the YANG enumerated type admin-status.
@@ -704,11 +754,11 @@ func (x SonicVlanAdminStatus) String() string {
 }
 
 func (SonicVlanAdminStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_enums_proto_enumTypes[11].Descriptor()
+	return file_enums_proto_enumTypes[12].Descriptor()
 }
 
 func (SonicVlanAdminStatus) Type() protoreflect.EnumType {
-	return &file_enums_proto_enumTypes[11]
+	return &file_enums_proto_enumTypes[12]
 }
 
 func (x SonicVlanAdminStatus) Number() protoreflect.EnumNumber {
@@ -717,7 +767,7 @@ func (x SonicVlanAdminStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SonicVlanAdminStatus.Descriptor instead.
 func (SonicVlanAdminStatus) EnumDescriptor() ([]byte, []int) {
-	return file_enums_proto_rawDescGZIP(), []int{11}
+	return file_enums_proto_rawDescGZIP(), []int{12}
 }
 
 // SonicVlanIpFamily represents an enumerated type generated for the YANG enumerated type ip-family.
@@ -754,11 +804,11 @@ func (x SonicVlanIpFamily) String() string {
 }
 
 func (SonicVlanIpFamily) Descriptor() protoreflect.EnumDescriptor {
-	return file_enums_proto_enumTypes[12].Descriptor()
+	return file_enums_proto_enumTypes[13].Descriptor()
 }
 
 func (SonicVlanIpFamily) Type() protoreflect.EnumType {
-	return &file_enums_proto_enumTypes[12]
+	return &file_enums_proto_enumTypes[13]
 }
 
 func (x SonicVlanIpFamily) Number() protoreflect.EnumNumber {
@@ -767,7 +817,7 @@ func (x SonicVlanIpFamily) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SonicVlanIpFamily.Descriptor instead.
 func (SonicVlanIpFamily) EnumDescriptor() ([]byte, []int) {
-	return file_enums_proto_rawDescGZIP(), []int{12}
+	return file_enums_proto_rawDescGZIP(), []int{13}
 }
 
 // SonicVlanVlanTaggingMode represents an enumerated type generated for the YANG enumerated type vlan-tagging-mode.
@@ -807,11 +857,11 @@ func (x SonicVlanVlanTaggingMode) String() string {
 }
 
 func (SonicVlanVlanTaggingMode) Descriptor() protoreflect.EnumDescriptor {
-	return file_enums_proto_enumTypes[13].Descriptor()
+	return file_enums_proto_enumTypes[14].Descriptor()
 }
 
 func (SonicVlanVlanTaggingMode) Type() protoreflect.EnumType {
-	return &file_enums_proto_enumTypes[13]
+	return &file_enums_proto_enumTypes[14]
 }
 
 func (x SonicVlanVlanTaggingMode) Number() protoreflect.EnumNumber {
@@ -820,7 +870,7 @@ func (x SonicVlanVlanTaggingMode) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SonicVlanVlanTaggingMode.Descriptor instead.
 func (SonicVlanVlanTaggingMode) EnumDescriptor() ([]byte, []int) {
-	return file_enums_proto_rawDescGZIP(), []int{13}
+	return file_enums_proto_rawDescGZIP(), []int{14}
 }
 
 var File_enums_proto protoreflect.FileDescriptor
@@ -1006,6 +1056,14 @@ var file_enums_proto_rawDesc = []byte{
 	0x53, 0x54, 0x41, 0x54, 0x55, 0x53, 0x5f, 0x75, 0x70, 0x10, 0x01, 0x1a, 0x05, 0x82, 0x41, 0x02,
 	0x75, 0x70, 0x12, 0x26, 0x0a, 0x19, 0x53, 0x4f, 0x4e, 0x49, 0x43, 0x50, 0x4f, 0x52, 0x54, 0x41,
 	0x44, 0x4d, 0x49, 0x4e, 0x53, 0x54, 0x41, 0x54, 0x55, 0x53, 0x5f, 0x64, 0x6f, 0x77, 0x6e, 0x10,
+	0x02, 0x1a, 0x07, 0x82, 0x41, 0x04, 0x64, 0x6f, 0x77, 0x6e, 0x2a, 0x7e, 0x0a, 0x13, 0x53, 0x6f,
+	0x6e, 0x69, 0x63, 0x50, 0x6f, 0x72, 0x74, 0x4f, 0x70, 0x65, 0x72, 0x53, 0x74, 0x61, 0x74, 0x75,
+	0x73, 0x12, 0x1d, 0x0a, 0x19, 0x53, 0x4f, 0x4e, 0x49, 0x43, 0x50, 0x4f, 0x52, 0x54, 0x4f, 0x50,
+	0x45, 0x52, 0x53, 0x54, 0x41, 0x54, 0x55, 0x53, 0x5f, 0x55, 0x4e, 0x53, 0x45, 0x54, 0x10, 0x00,
+	0x12, 0x21, 0x0a, 0x16, 0x53, 0x4f, 0x4e, 0x49, 0x43, 0x50, 0x4f, 0x52, 0x54, 0x4f, 0x50, 0x45,
+	0x52, 0x53, 0x54, 0x41, 0x54, 0x55, 0x53, 0x5f, 0x75, 0x70, 0x10, 0x01, 0x1a, 0x05, 0x82, 0x41,
+	0x02, 0x75, 0x70, 0x12, 0x25, 0x0a, 0x18, 0x53, 0x4f, 0x4e, 0x49, 0x43, 0x50, 0x4f, 0x52, 0x54,
+	0x4f, 0x50, 0x45, 0x52, 0x53, 0x54, 0x41, 0x54, 0x55, 0x53, 0x5f, 0x64, 0x6f, 0x77, 0x6e, 0x10,
 	0x02, 0x1a, 0x07, 0x82, 0x41, 0x04, 0x64, 0x6f, 0x77, 0x6e, 0x2a, 0x9e, 0x01, 0x0a, 0x1b, 0x53,
 	0x6f, 0x6e, 0x69, 0x63, 0x50, 0x6f, 0x72, 0x74, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x41,
 	0x64, 0x6d, 0x69, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x25, 0x0a, 0x21, 0x53, 0x4f,
@@ -1064,7 +1122,7 @@ func file_enums_proto_rawDescGZIP() []byte {
 	return file_enums_proto_rawDescData
 }
 
-var file_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 14)
+var file_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 15)
 var file_enums_proto_goTypes = []interface{}{
 	(SonicAclAclTableType)(0),                     // 0: sonic.SonicAclAclTableType
 	(SonicAclIpType)(0),                           // 1: sonic.SonicAclIpType
@@ -1076,10 +1134,11 @@ var file_enums_proto_goTypes = []interface{}{
 	(SonicPlatformTypesSONICHARDWARECOMPONENT)(0), // 7: sonic.SonicPlatformTypesSONICHARDWARECOMPONENT
 	(SonicPlatformTypesSONICSOFTWARECOMPONENT)(0), // 8: sonic.SonicPlatformTypesSONICSOFTWARECOMPONENT
 	(SonicPortAdminStatus)(0),                     // 9: sonic.SonicPortAdminStatus
-	(SonicPortchannelAdminStatus)(0),              // 10: sonic.SonicPortchannelAdminStatus
-	(SonicVlanAdminStatus)(0),                     // 11: sonic.SonicVlanAdminStatus
-	(SonicVlanIpFamily)(0),                        // 12: sonic.SonicVlanIpFamily
-	(SonicVlanVlanTaggingMode)(0),                 // 13: sonic.SonicVlanVlanTaggingMode
+	(SonicPortOperStatus)(0),                      // 10: sonic.SonicPortOperStatus
+	(SonicPortchannelAdminStatus)(0),              // 11: sonic.SonicPortchannelAdminStatus
+	(SonicVlanAdminStatus)(0),                     // 12: sonic.SonicVlanAdminStatus
+	(SonicVlanIpFamily)(0),                        // 13: sonic.SonicVlanIpFamily
+	(SonicVlanVlanTaggingMode)(0),                 // 14: sonic.SonicVlanVlanTaggingMode
 }
 var file_enums_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -1099,7 +1158,7 @@ func file_enums_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_enums_proto_rawDesc,
-			NumEnums:      14,
+			NumEnums:      15,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,

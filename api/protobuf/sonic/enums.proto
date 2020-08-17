@@ -121,6 +121,13 @@ enum SonicPortAdminStatus {
   SONICPORTADMINSTATUS_down = 2 [(yext.yang_name) = "down"];
 }
 
+// SonicPortOperStatus represents an enumerated type generated for the YANG enumerated type oper-status.
+enum SonicPortOperStatus {
+  SONICPORTOPERSTATUS_UNSET = 0;
+  SONICPORTOPERSTATUS_up = 1 [(yext.yang_name) = "up"];
+  SONICPORTOPERSTATUS_down = 2 [(yext.yang_name) = "down"];
+}
+
 // SonicPortchannelAdminStatus represents an enumerated type generated for the YANG enumerated type admin-status.
 enum SonicPortchannelAdminStatus {
   SONICPORTCHANNELADMINSTATUS_UNSET = 0;
