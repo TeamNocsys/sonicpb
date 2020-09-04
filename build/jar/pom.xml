@@ -6,7 +6,7 @@
 
     <groupId>com.nocsys</groupId>
     <artifactId>sonicpb</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <packaging>bundle</packaging>
 
     <properties>
@@ -41,7 +41,7 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Export-Package>com.nocsys.openconfig.*;yext.*;ywrapper.*;com.google.protobuf.*</Export-Package>
+                        <Export-Package>com.nocsys.sonic.*;yext.*;ywrapper.*;com.google.protobuf.*</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>
