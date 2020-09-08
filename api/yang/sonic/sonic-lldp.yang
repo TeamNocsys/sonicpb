@@ -11,6 +11,11 @@ module sonic-lldp {
 
     description "LLDP yang Module for SONiC OS";
 
+    revision 2019-08-10 {
+        
+        description "First Revision";
+    }
+
     container sonic-lldp {
 
         grouping lldp-config {
