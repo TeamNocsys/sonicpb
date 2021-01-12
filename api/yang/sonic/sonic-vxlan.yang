@@ -1,0 +1,133 @@
+module sonic-vxlan {
+
+	yang-version 1.1;
+
+	namespace "http://github.com/Azure/sonic-vxlan";
+	prefix vxlan;
+
+	import sonic-types {
+		prefix stypes;
+		revision-date 2019-07-01;
+	}
+
+	description "VXLAN yang Module for SONiC OS";
+
+	revision 2021-01-11 {
+		description "First Revision";
+	}
+
+	container sonic-vxlan {
+
+		container vxlan-tunnel {
+
+			description "VXLAN_TUNNEL part of config_db.json";
+
+			list vxlan-tunnel-list {
+
+			    key "tunnel-name";
+
+                ext:key-regex-configdb-to-yang "^([a-zA-Z0-9_-]+)$";
+
+                ext:key-regex-yang-to-configdb "<tunnel-name>";
+
+			    leaf tunnel-name {
+					type string {
+						length 1..128;
+					}
+			    }
+
+			    leaf src-ip {
+			        type stypes:sonic-ip4-prefix;
+				}
+
+			    leaf dst-ip {
+			        type stypes:sonic-ip4-prefix;
+				}
+
+				leaf-list maps {
+					/* leaf-list members are unique by default */
+					type leafref {
+						path /vxlan:sonic-vxlan/vxlan:vxlan-tunnel-map/vxlan:vxlan-tunnel-map-list/vxlan:tunnel-map;
+					}
+				}
+			}
+		}
+
+		container vxlan-tunnel-map {
+
+			description "VXLAN_TUNNEL_MAP part of config_db.json";
+
+			list vxlan-tunnel-map-list {
+
+                key "tunnel-name tunnel-map";
+
+                ext:key-regex-configdb-to-yang "^([a-zA-Z0-9-_]+)|([a-zA-Z0-9-_]+)$";
+
+                ext:key-regex-yang-to-configdb "<tunnel-name>|<tunnel-map>";
+
+                leaf tunnel-name {
+                    type leafref {
+                        path /vxlan:sonic-vxlan/vxlan:vxlan-tunnel/vxlan:vxlan-tunnel-list/vxlan:tunnel-name;
+                    }
+                }
+
+                leaf tunnel-map {
+					type string {
+						length 1..128;
+					}
+                }
+
+			    leaf vni {
+			        type uint32 {
+			            range 1..16777216;
+			        }
+				}
+
+			    leaf vlan {
+			        type leafref {
+			            path "/vlan:sonic-vlan/vlan:vlan/vlan:vlan-list/vlan:vlanid";
+			        }
+				}
+			}
+
+		}
+
+		container vnet {
+
+			description "VNET part of config_db.json";
+
+            list vnet-list {
+
+                key "vnet-name";
+
+                ext:key-regex-configdb-to-yang "^([a-zA-Z0-9-_]+)$";
+
+                ext:key-regex-yang-to-configdb "<vnet-name>";
+
+                leaf vnet-name {
+                    type string {
+                        length 1..128;
+                    }
+                }
+
+                leaf vxlan-tunnel {
+                    type leafref {
+                        path /vxlan:sonic-vxlan/vxlan:vxlan-tunnel/vxlan:vxlan-tunnel-list/vxlan:tunnel-name;
+                    }
+                }
+
+			    leaf vni {
+			        type uint32 {
+			            range 1..16777216;
+			        }
+				}
+
+				leaf-list peer-list {
+                    type leafref {
+                        path /vxlan:sonic-vxlan/vxlan:vnet/vxlan:vnet-list/vxlan:vnet-name;
+                    }
+				}
+            }
+		}
+	}
+}
