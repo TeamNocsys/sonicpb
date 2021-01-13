@@ -4,7 +4,7 @@ export GOPATH=`go env GOPATH`
 output="tmp"
 
 if [ -d "$output" ];then
-rm -rf "$output"
+  rm -rf "$output"
 fi
 
 go run ${GOPATH}/src/github.com/openconfig/ygot/proto_generator/protogenerator.go -output_dir=$output -exclude_modules=ietf-interfaces `find ../api/yang/ -path '../api/yang/sonic/*.yang' -o -path '../api/yang/sonic/third_party/ietf/*.yang' | xargs echo`
@@ -16,8 +16,8 @@ find $output -name "*.proto" | xargs sed -i '/^package sonic;$/a\option java_pac
 
 dest="../api/protobuf/sonic"
 if [ -d "$dest" ];then
-path="$dest""/*.proto"
-rm -rf $path
+  path="$dest""/*.proto"
+  rm -rf $path
 fi
 find $output -name "*.proto" | xargs -i mv {} ../api/protobuf/sonic
 

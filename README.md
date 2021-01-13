@@ -18,7 +18,7 @@ $ GO111MODULE=off go get -u github.com/openconfig/ygot
 
 ```shell
 $ sudo apt install -y protobuf-compiler
-$ go get -u google.golang.org/protobuf/protoc-gen-go
+$ go get -u google.golang.org/protobuf/cmd/protoc-gen-go
 $ GO111MODULE=off go get -u github.com/google/protobuf
 ```
 
@@ -37,7 +37,7 @@ $ git clone  https://github.com/TeamNocsys/sonicpb.git
 1. 进入编译目录
 
 ```shell
-$ cd shell
+$ cd build
 ```
 
 2. 将YANG模型转换成Protobuf文件
