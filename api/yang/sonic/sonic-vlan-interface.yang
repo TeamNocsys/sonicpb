@@ -1,0 +1,121 @@
+module sonic-interface {
+
+	yang-version 1.1;
+
+	namespace "http://github.com/Azure/sonic-interface";
+	prefix intf;
+
+	import ietf-yang-types {
+		prefix yang;
+	}
+
+	import ietf-inet-types {
+		prefix inet;
+	}
+
+	import sonic-types {
+		prefix stypes;
+		revision-date 2019-07-01;
+	}
+
+	import sonic-extension {
+		prefix ext;
+		revision-date 2019-07-01;
+	}
+
+	import sonic-vlan {
+		prefix vlan;
+		revision-date 2019-07-01;
+	}
+
+	description "VLAN INTERFACE yang Module for SONiC OS";
+
+	revision 2021-01-13 {
+		description "First Revision";
+	}
+
+	container sonic-vlan-interface {
+
+        container vlan-interface {
+
+			description "VLAN_INTERFACE part of config_db.json";
+
+			list vlan-interface-list {
+
+				description "VLAN_INTERFACE part of config_db.json with vrf";
+
+				key "vlan-name";
+
+				ext:key-regex-configdb-to-yang "^(Vlan[a-zA-Z0-9-_]+)$";
+
+				ext:key-regex-yang-to-configdb "<vlan-name>";
+
+				leaf vlan-name {
+					type leafref {
+						path "/vlan:sonic-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name";
+					}
+				}
+
+				leaf vrf-name {
+					type string {
+						pattern "Vrf[a-zA-Z0-9_-]+";
+						length 3..255;
+					}
+				}
+			}
+			/* end of VLAN_INTERFACE_LIST */
+
+			list vlan-interface-ipprefix-list {
+
+				description "VLAN_INTERFACE part of config_db.json with ip-prefix";
+
+				key "vlan-name ip-prefix";
+
+				ext:key-regex-configdb-to-yang "^(Vlan[a-zA-Z0-9-_]+)|([a-fA-F0-9:./]+)$";
+
+				ext:key-regex-yang-to-configdb "<vlan-name>|<ip-prefix>";
+
+				leaf vlan-name {
+					/* This node must be present in VLAN_INTERFACE_LIST */
+					must "(current() = ../../vlan-interface-list[vlan-name=current()]/vlan-name)"
+					{
+						error-message "Must condition not satisfied, Try adding VLAN: {}, Example: 'Vlan0': {}";
+					}
+
+					type leafref {
+						path "/vlan:sonic-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name";
+					}
+				}
+
+				leaf ip-prefix {
+					type union {
+						type stypes:sonic-ip4-prefix;
+						type stypes:sonic-ip6-prefix;
+					}
+				}
+
+				leaf scope {
+					type enumeration {
+						enum global;
+						enum local;
+					}
+				}
+
+				leaf family {
+
+					/* family leaf needed for backward compatibility
+					   Both ip4 and ip6 address are string in IETF RFC 6021,
+					   so must statement can check based on : or ., family
+					   should be IPv4 or IPv6 according.
+					 */
+
+					must "(contains(../ip-prefix, ':') and current()='IPv6') or
+						(contains(../ip-prefix, '.') and current()='IPv4')";
+					type stypes:ip-family;
+				}
+			}
+			/* end of VLAN_INTERFACE_IPPREFIX_LIST */
+		}
+		/* end of VLAN_INTERFACE container */
+	}
+}
