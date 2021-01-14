@@ -2,22 +2,27 @@
 // representation of a YANG schema.
 //
 // Input schema modules:
-//  - ../api/yang/sonic/sonic-acl.yang
+//  - ../api/yang/sonic/sonic-platform.yang
+//  - ../api/yang/sonic/sonic-interface.yang
 //  - ../api/yang/sonic/sonic-port.yang
-//  - ../api/yang/sonic/sonic-types.yang
-//  - ../api/yang/sonic/sonic-portchannel.yang
-//  - ../api/yang/sonic/sonic-platform-types.yang
-//  - ../api/yang/sonic/sonic-lldp-types.yang
-//  - ../api/yang/sonic/third_party/ietf/iana-if-type.yang
-//  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
+//  - ../api/yang/sonic/sonic-vrf.yang
 //  - ../api/yang/sonic/third_party/ietf/ietf-interfaces.yang
 //  - ../api/yang/sonic/third_party/ietf/ietf-yang-types.yang
-//  - ../api/yang/sonic/sonic-vlan.yang
-//  - ../api/yang/sonic/sonic-lldp.yang
-//  - ../api/yang/sonic/sonic-interface.yang
+//  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
+//  - ../api/yang/sonic/third_party/ietf/iana-if-type.yang
 //  - ../api/yang/sonic/sonic-loopback-interface.yang
-//  - ../api/yang/sonic/sonic-platform.yang
+//  - ../api/yang/sonic/sonic-platform-types.yang
+//  - ../api/yang/sonic/sonic-lldp-types.yang
+//  - ../api/yang/sonic/sonic-lldp.yang
+//  - ../api/yang/sonic/sonic-vlan.yang
+//  - ../api/yang/sonic/sonic-portchannel.yang
+//  - ../api/yang/sonic/sonic-portchannel-interface.yang
 //  - ../api/yang/sonic/sonic-extension.yang
+//  - ../api/yang/sonic/sonic-bgp.yang
+//  - ../api/yang/sonic/sonic-vxlan.yang
+//  - ../api/yang/sonic/sonic-acl.yang
+//  - ../api/yang/sonic/sonic-types.yang
+//  - ../api/yang/sonic/sonic-vlan-interface.yang
 syntax = "proto3";
 
 package sonic;
@@ -34,25 +39,25 @@ message SonicLldp {
       message Config {
       }
       message State {
-        ywrapper.UintValue age = 146671196 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/age"];
-        ywrapper.StringValue chassis_id = 104698433 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/chassis-id"];
-        sonic.SonicLldpChassisIdType chassis_id_type = 265100734 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/chassis-id-type"];
-        ywrapper.UintValue index = 258738913 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/index"];
-        ywrapper.StringValue local_port = 30130656 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/local-port"];
-        ywrapper.StringValue port_description = 158789391 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/port-description"];
-        ywrapper.StringValue port_id = 374919748 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/port-id"];
-        sonic.SonicLldpPortIdType port_id_type = 264867561 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/port-id-type"];
-        ywrapper.StringValue system_description = 480308725 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/system-description"];
-        ywrapper.StringValue system_name = 169239952 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/system-name"];
+        ywrapper.UintValue age = 1 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/age"];
+        ywrapper.StringValue chassis_id = 2 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/chassis-id"];
+        sonic.SonicLldpTypesChassisIdType chassis_id_type = 3 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/chassis-id-type"];
+        ywrapper.UintValue index = 4 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/index"];
+        ywrapper.StringValue local_port = 5 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/local-port"];
+        ywrapper.StringValue port_description = 6 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/port-description"];
+        ywrapper.StringValue port_id = 7 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/port-id"];
+        sonic.SonicLldpTypesPortIdType port_id_type = 8 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/port-id-type"];
+        ywrapper.StringValue system_description = 9 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/system-description"];
+        ywrapper.StringValue system_name = 10 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state/system-name"];
       }
-      Config config = 264343743 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/config"];
-      State state = 160798448 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state"];
+      Config config = 1 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/config"];
+      State state = 2 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/state"];
     }
     message DeviceListKey {
       string device_name = 1 [(yext.schemapath) = "/sonic-lldp/lldp/device-list/device-name"];
       DeviceList device_list = 2;
     }
-    repeated DeviceListKey device_list = 134452366 [(yext.schemapath) = "/sonic-lldp/lldp/device-list"];
+    repeated DeviceListKey device_list = 1 [(yext.schemapath) = "/sonic-lldp/lldp/device-list"];
   }
-  Lldp lldp = 433335412 [(yext.schemapath) = "/sonic-lldp/lldp"];
+  Lldp lldp = 1 [(yext.schemapath) = "/sonic-lldp/lldp"];
 }

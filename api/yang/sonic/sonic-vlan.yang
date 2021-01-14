@@ -36,86 +36,6 @@ module sonic-vlan {
 
 	container sonic-vlan {
 
-		container vlan-interface {
-
-			description "VLAN_INTERFACE part of config_db.json";
-
-			list vlan-interface-list {
-
-				description "VLAN INTERFACE part of config_db.json with vrf";
-
-				key "vlan-name";
-
-				ext:key-regex-configdb-to-yang "^(Vlan[a-zA-Z0-9_-]+)$";
-
-				ext:key-regex-yang-to-configdb "<vlan-name>";
-
-				leaf vlan-name {
-					type leafref {
-						path /vlan:sonic-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name;
-					}
-				}
-
-				leaf vrf_name {
-					type string {
-						pattern "Vrf[a-zA-Z0-9_-]+";
-						length 3..255;
-					}
-				}
-			}
-			/* end of VLAN_INTERFACE_LIST */
-
-			list vlan-interface-ipprefix-list {
-
-				key "vlan-name ip-prefix";
-
-				ext:key-regex-configdb-to-yang "^(Vlan[a-zA-Z0-9_-]+)|([a-fA-F0-9:./]+$)";
-
-				ext:key-regex-yang-to-configdb "<vlan-name>|<ip-prefix>";
-
-				leaf vlan-name {
-					/* This node must be present in VLAN_INTERFACE_LIST */
-					must "(current() = ../../vlan-interface-list[vlan_name=current()]/vlan-name)"
-					{
-						error-message "Must condition not satisfied, Try adding Vlan<vlanid>: {}, Example: 'Vlan100': {}";
-					}
-
-					type leafref {
-						path "/vlan:sonic-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name";
-					}
-				}
-
-				leaf ip-prefix {
-					type union {
-						type stypes:sonic-ip4-prefix;
-						type stypes:sonic-ip6-prefix;
-					}
-				}
-
-				leaf scope {
-					type enumeration {
-						enum global;
-						enum local;
-					}
-				}
-
-				leaf family {
-
-					/* family leaf needed for backward compatibility
-					   Both ip4 and ip6 address are string in IETF RFC 6021,
-					   so must statement can check based on : or ., family
-					   should be IPv4 or IPv6 according.
-					 */
-
-					must "(contains(../ip-prefix, ':') and current()='IPv6') or
-						(contains(../ip-prefix, '.') and current()='IPv4')";
-					type stypes:ip-family;
-				}
-			}
-			/* end of VLAN_INTERFACE_LIST */
-		}
-		/* end of VLAN_INTERFACE container */
-
 		container vlan {
 
 			description "VLAN part of config_db.json";
@@ -123,10 +43,6 @@ module sonic-vlan {
 			list vlan-list {
 
 				key "vlan-name";
-
-				ext:key-regex-configdb-to-yang "^(Vlan[a-zA-Z0-9_-]+)$";
-
-				ext:key-regex-yang-to-configdb "<vlan-name>";
 
 				leaf vlan-name {
 					type string {
@@ -180,10 +96,6 @@ module sonic-vlan {
 
 				key "vlan-name port";
 
-				ext:key-regex-configdb-to-yang "^(Vlan[a-zA-Z0-9-_]+)|(Ethernet[0-9]+)$";
-
-				ext:key-regex-yang-to-configdb "<vlan-name>|<port>";
-
 				leaf vlan-name {
 					type leafref {
 						path "/vlan:sonic-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name";
@@ -202,10 +114,67 @@ module sonic-vlan {
 					type stypes:vlan-tagging-mode;
 				}
 			}
-            /* end of list VLAN_MEMBER_LIST */
+      /* end of list VLAN_MEMBER_LIST */
 		}
-        /* end of container VLAN_MEMBER */
+    /* end of container VLAN_MEMBER */
+    
+		container vlan-interface {
+
+			description "VLAN_INTERFACE part of config_db.json";
+
+			list vlan-interface-list {
+
+				description "VLAN INTERFACE part of config_db.json with vrf";
+
+				key "vlan-name";
+
+				leaf vlan-name {
+					type leafref {
+						path /vlan:sonic-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name;
+					}
+				}
+
+				leaf vrf_name {
+					type string {
+						pattern "Vrf[a-zA-Z0-9_-]+";
+						length 3..255;
+					}
+				}
+			}
+			/* end of VLAN_INTERFACE_LIST */
+
+			list vlan-interface-ipprefix-list {
+
+				key "vlan-name ip-prefix";
+
+				leaf vlan-name {
+					type leafref {
+						path "/vlan:sonic-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name";
+					}
+				}
+
+				leaf ip-prefix {
+					type union {
+						type stypes:sonic-ip4-prefix;
+						type stypes:sonic-ip6-prefix;
+					}
+				}
+
+				leaf scope {
+					type enumeration {
+						enum global;
+						enum local;
+					}
+				}
+
+				leaf family {
+					type stypes:ip-family;
+				}
+			}
+			/* end of VLAN_INTERFACE_LIST */
+		}
+		/* end of VLAN_INTERFACE container */
 	}
-    /* end of container sonic-vlan */
+  /* end of container sonic-vlan */
 }
 /* end of module sonic-vlan */

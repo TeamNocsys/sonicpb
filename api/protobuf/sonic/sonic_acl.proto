@@ -2,22 +2,27 @@
 // representation of a YANG schema.
 //
 // Input schema modules:
-//  - ../api/yang/sonic/sonic-acl.yang
+//  - ../api/yang/sonic/sonic-platform.yang
+//  - ../api/yang/sonic/sonic-interface.yang
 //  - ../api/yang/sonic/sonic-port.yang
-//  - ../api/yang/sonic/sonic-types.yang
-//  - ../api/yang/sonic/sonic-portchannel.yang
-//  - ../api/yang/sonic/sonic-platform-types.yang
-//  - ../api/yang/sonic/sonic-lldp-types.yang
-//  - ../api/yang/sonic/third_party/ietf/iana-if-type.yang
-//  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
+//  - ../api/yang/sonic/sonic-vrf.yang
 //  - ../api/yang/sonic/third_party/ietf/ietf-interfaces.yang
 //  - ../api/yang/sonic/third_party/ietf/ietf-yang-types.yang
-//  - ../api/yang/sonic/sonic-vlan.yang
-//  - ../api/yang/sonic/sonic-lldp.yang
-//  - ../api/yang/sonic/sonic-interface.yang
+//  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
+//  - ../api/yang/sonic/third_party/ietf/iana-if-type.yang
 //  - ../api/yang/sonic/sonic-loopback-interface.yang
-//  - ../api/yang/sonic/sonic-platform.yang
+//  - ../api/yang/sonic/sonic-platform-types.yang
+//  - ../api/yang/sonic/sonic-lldp-types.yang
+//  - ../api/yang/sonic/sonic-lldp.yang
+//  - ../api/yang/sonic/sonic-vlan.yang
+//  - ../api/yang/sonic/sonic-portchannel.yang
+//  - ../api/yang/sonic/sonic-portchannel-interface.yang
 //  - ../api/yang/sonic/sonic-extension.yang
+//  - ../api/yang/sonic/sonic-bgp.yang
+//  - ../api/yang/sonic/sonic-vxlan.yang
+//  - ../api/yang/sonic/sonic-acl.yang
+//  - ../api/yang/sonic/sonic-types.yang
+//  - ../api/yang/sonic/sonic-vlan-interface.yang
 syntax = "proto3";
 
 package sonic;
@@ -31,39 +36,39 @@ import "enums.proto";
 message SonicAcl {
   message AclRule {
     message AclRuleList {
-      ywrapper.StringValue L4_DST_PORT_RANGE = 454662846 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/L4_DST_PORT_RANGE"];
-      ywrapper.UintValue dscp = 364632447 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/dscp"];
-      ywrapper.StringValue dst_ip = 456558486 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/dst-ip"];
-      ywrapper.StringValue dst_ip6 = 123210906 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/dst-ip6"];
-      ywrapper.StringValue ether_type = 409297744 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/ether-type"];
-      ywrapper.UintValue icmp_code = 275034352 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/icmp-code"];
-      ywrapper.UintValue icmp_type = 45584939 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/icmp-type"];
-      ywrapper.UintValue icmpv6_code = 131599530 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/icmpv6-code"];
-      ywrapper.UintValue icmpv6_type = 48580813 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/icmpv6-type"];
-      repeated ywrapper.UintValue in_ports = 521428743 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/in-ports"];
-      ywrapper.StringValue inner_ether_type = 328900465 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/inner-ether-type"];
-      ywrapper.UintValue inner_ip_protocol = 392859308 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/inner-ip-protocol"];
-      ywrapper.UintValue inner_l4_dst_port = 475273722 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/inner-l4-dst-port"];
-      ywrapper.UintValue inner_l4_src_port = 226210171 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/inner-l4-src-port"];
-      ywrapper.UintValue ip_protocol = 459470131 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/ip-protocol"];
-      sonic.SonicAclIpType ip_type = 63697875 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/ip-type"];
-      ywrapper.UintValue l4_dst_port = 300638670 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/l4-dst-port"];
-      ywrapper.UintValue l4_src_port = 173889531 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/l4-src-port"];
-      ywrapper.StringValue l4_src_port_range = 524890999 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/l4-src-port-range"];
-      repeated ywrapper.UintValue out_ports = 536025420 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/out-ports"];
-      sonic.SonicAclPacketAction packet_action = 364835440 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/packet-action"];
-      ywrapper.UintValue priority = 21130269 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/priority"];
-      ywrapper.StringValue src_ip = 399267927 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/src-ip"];
-      ywrapper.StringValue src_ip6 = 303179295 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/src_ip6"];
-      ywrapper.UintValue tc = 238976434 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/tc"];
-      ywrapper.StringValue tcp_flags = 492166780 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/tcp-flags"];
+      ywrapper.UintValue dscp = 1 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/dscp"];
+      ywrapper.StringValue dst_ip = 2 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/dst-ip"];
+      ywrapper.StringValue dst_ip6 = 3 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/dst-ip6"];
+      ywrapper.StringValue ether_type = 4 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/ether-type"];
+      ywrapper.UintValue icmp_code = 5 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/icmp-code"];
+      ywrapper.UintValue icmp_type = 6 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/icmp-type"];
+      ywrapper.UintValue icmpv6_code = 7 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/icmpv6-code"];
+      ywrapper.UintValue icmpv6_type = 8 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/icmpv6-type"];
+      repeated ywrapper.UintValue in_ports = 9 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/in-ports"];
+      ywrapper.StringValue inner_ether_type = 10 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/inner-ether-type"];
+      ywrapper.UintValue inner_ip_protocol = 11 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/inner-ip-protocol"];
+      ywrapper.UintValue inner_l4_dst_port = 12 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/inner-l4-dst-port"];
+      ywrapper.UintValue inner_l4_src_port = 13 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/inner-l4-src-port"];
+      ywrapper.UintValue ip_protocol = 14 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/ip-protocol"];
+      sonic.SonicTypesIpType ip_type = 15 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/ip-type"];
+      ywrapper.UintValue l4_dst_port = 16 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/l4-dst-port"];
+      ywrapper.StringValue l4_dst_port_range = 17 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/l4-dst-port-range"];
+      ywrapper.UintValue l4_src_port = 18 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/l4-src-port"];
+      ywrapper.StringValue l4_src_port_range = 19 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/l4-src-port-range"];
+      repeated ywrapper.UintValue out_ports = 20 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/out-ports"];
+      sonic.SonicTypesPacketAction packet_action = 21 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/packet-action"];
+      ywrapper.UintValue priority = 22 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/priority"];
+      ywrapper.StringValue src_ip = 23 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/src-ip"];
+      ywrapper.StringValue src_ip6 = 24 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/src_ip6"];
+      ywrapper.UintValue tc = 25 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/tc"];
+      ywrapper.StringValue tcp_flags = 26 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/tcp-flags"];
     }
     message AclRuleListKey {
       string acl_table_name = 1 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/acl-table-name"];
       string rule_name = 2 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list/rule-name"];
       AclRuleList acl_rule_list = 3;
     }
-    repeated AclRuleListKey acl_rule_list = 348123086 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list"];
+    repeated AclRuleListKey acl_rule_list = 1 [(yext.schemapath) = "/sonic-acl/acl-rule/acl-rule-list"];
   }
   message AclTable {
     message AclTableList {
@@ -72,17 +77,17 @@ message SonicAcl {
         STAGE_INGRESS = 1 [(yext.yang_name) = "INGRESS"];
         STAGE_EGRESS = 2 [(yext.yang_name) = "EGRESS"];
       }
-      ywrapper.StringValue policy_desc = 529240035 [(yext.schemapath) = "/sonic-acl/acl-table/acl-table-list/policy-desc"];
-      repeated ywrapper.StringValue ports = 188591839 [(yext.schemapath) = "/sonic-acl/acl-table/acl-table-list/ports"];
-      Stage stage = 291549669 [(yext.schemapath) = "/sonic-acl/acl-table/acl-table-list/stage"];
-      sonic.SonicAclAclTableType type = 403132361 [(yext.schemapath) = "/sonic-acl/acl-table/acl-table-list/type"];
+      ywrapper.StringValue policy_desc = 1 [(yext.schemapath) = "/sonic-acl/acl-table/acl-table-list/policy-desc"];
+      repeated ywrapper.StringValue ports = 2 [(yext.schemapath) = "/sonic-acl/acl-table/acl-table-list/ports"];
+      Stage stage = 3 [(yext.schemapath) = "/sonic-acl/acl-table/acl-table-list/stage"];
+      sonic.SonicTypesAclTableType type = 4 [(yext.schemapath) = "/sonic-acl/acl-table/acl-table-list/type"];
     }
     message AclTableListKey {
       string acl_table_name = 1 [(yext.schemapath) = "/sonic-acl/acl-table/acl-table-list/acl-table-name"];
       AclTableList acl_table_list = 2;
     }
-    repeated AclTableListKey acl_table_list = 373980378 [(yext.schemapath) = "/sonic-acl/acl-table/acl-table-list"];
+    repeated AclTableListKey acl_table_list = 1 [(yext.schemapath) = "/sonic-acl/acl-table/acl-table-list"];
   }
-  AclRule acl_rule = 534314179 [(yext.schemapath) = "/sonic-acl/acl-rule"];
-  AclTable acl_table = 389787203 [(yext.schemapath) = "/sonic-acl/acl-table"];
+  AclRule acl_rule = 1 [(yext.schemapath) = "/sonic-acl/acl-rule"];
+  AclTable acl_table = 2 [(yext.schemapath) = "/sonic-acl/acl-table"];
 }

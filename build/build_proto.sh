@@ -7,7 +7,7 @@ if [ -d "$output" ];then
   rm -rf "$output"
 fi
 
-go run ${GOPATH}/src/github.com/openconfig/ygot/proto_generator/protogenerator.go -output_dir=$output -exclude_modules=ietf-interfaces `find ../api/yang/ -path '../api/yang/sonic/*.yang' -o -path '../api/yang/sonic/third_party/ietf/*.yang' | xargs echo`
+proto_generator -output_dir=$output -typedef_enum_with_defmod -consistent_union_enum_names -exclude_modules=ietf-interfaces `find ../api/yang/ -path '../api/yang/sonic/*.yang' -o -path '../api/yang/sonic/third_party/ietf/*.yang' | xargs echo`
 find $output -name "*.proto" | xargs sed -i 's/^package openconfig.*;$/package sonic;/g'
 find $output -name "*.proto" | xargs sed -i 's/^import "github.com.*\//import "/g'
 find $output -name "*.proto" | xargs sed -i 's/^import "openconfig.*\//import "/g'

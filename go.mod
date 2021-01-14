@@ -18,8 +18,7 @@ require (
 	github.com/ianlancetaylor/demangle v0.0.0-20200715173712-053cf528c12f // indirect
 	github.com/lyft/protoc-gen-star v0.4.15 // indirect
 	github.com/openconfig/gnmi v0.0.0-20200617225440-d2b4e6a45802 // indirect
-	github.com/openconfig/goyang v0.0.0-20200623182805-6be32aef2bcd // indirect
-	github.com/openconfig/ygot v0.8.3
+	github.com/openconfig/ygot v0.9.0
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pkg/sftp v1.11.0 // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect

@@ -15,26 +15,26 @@ module sonic-vrf {
 
 		container vrf {
 
-		    description "VRF part of config_db.json";
+			description "VRF part of config_db.json";
 
-            list vrf-list {
+			list vrf-list {
 
-                key "vrf-name";
+				key "vrf-name";
 
-                ext:key-regex-configdb-to-yang "^(Vrf[a-zA-Z0-9_-]+)$";
-
-                ext:key-regex-yang-to-configdb "<vrf-name>";
-
-                leaf vrf-name {
+				leaf vrf-name {
 					type string {
 						pattern 'Vrf[a-zA-Z0-9_-]+';
 					}
-                }
+				}
 
-                leaf fallback {
-                    type boolean;
-                }
-            }
+				leaf fallback {
+					type boolean;
+				}
+			}
+			/* end of VRF_LIST */
 		}
+		/* end of VRF container */
 	}
+	/* end of container sonic-vrf */
 }
+/* end of module sonic-vrf */
