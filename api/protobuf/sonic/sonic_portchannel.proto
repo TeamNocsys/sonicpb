@@ -2,22 +2,25 @@
 // representation of a YANG schema.
 //
 // Input schema modules:
-//  - ../api/yang/sonic/sonic-acl.yang
+//  - ../api/yang/sonic/sonic-platform.yang
+//  - ../api/yang/sonic/sonic-interface.yang
 //  - ../api/yang/sonic/sonic-port.yang
-//  - ../api/yang/sonic/sonic-types.yang
-//  - ../api/yang/sonic/sonic-portchannel.yang
-//  - ../api/yang/sonic/sonic-platform-types.yang
-//  - ../api/yang/sonic/sonic-lldp-types.yang
-//  - ../api/yang/sonic/third_party/ietf/iana-if-type.yang
-//  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
+//  - ../api/yang/sonic/sonic-vrf.yang
 //  - ../api/yang/sonic/third_party/ietf/ietf-interfaces.yang
 //  - ../api/yang/sonic/third_party/ietf/ietf-yang-types.yang
-//  - ../api/yang/sonic/sonic-vlan.yang
-//  - ../api/yang/sonic/sonic-lldp.yang
-//  - ../api/yang/sonic/sonic-interface.yang
+//  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
+//  - ../api/yang/sonic/third_party/ietf/iana-if-type.yang
 //  - ../api/yang/sonic/sonic-loopback-interface.yang
-//  - ../api/yang/sonic/sonic-platform.yang
+//  - ../api/yang/sonic/sonic-platform-types.yang
+//  - ../api/yang/sonic/sonic-lldp-types.yang
+//  - ../api/yang/sonic/sonic-lldp.yang
+//  - ../api/yang/sonic/sonic-vlan.yang
+//  - ../api/yang/sonic/sonic-portchannel.yang
 //  - ../api/yang/sonic/sonic-extension.yang
+//  - ../api/yang/sonic/sonic-bgp.yang
+//  - ../api/yang/sonic/sonic-vxlan.yang
+//  - ../api/yang/sonic/sonic-acl.yang
+//  - ../api/yang/sonic/sonic-types.yang
 syntax = "proto3";
 
 package sonic;
@@ -31,17 +34,54 @@ import "enums.proto";
 message SonicPortchannel {
   message Portchannel {
     message PortchannelList {
-      sonic.SonicPortchannelAdminStatus admin_status = 289246861 [(yext.schemapath) = "/sonic-portchannel/portchannel/portchannel-list/admin-status"];
-      ywrapper.StringValue description = 489610797 [(yext.schemapath) = "/sonic-portchannel/portchannel/portchannel-list/description"];
-      repeated ywrapper.StringValue members = 390606290 [(yext.schemapath) = "/sonic-portchannel/portchannel/portchannel-list/members"];
-      ywrapper.UintValue min_links = 106858059 [(yext.schemapath) = "/sonic-portchannel/portchannel/portchannel-list/min-links"];
-      ywrapper.UintValue mtu = 527911279 [(yext.schemapath) = "/sonic-portchannel/portchannel/portchannel-list/mtu"];
+      sonic.SonicTypesAdminStatus admin_status = 1 [(yext.schemapath) = "/sonic-portchannel/portchannel/portchannel-list/admin-status"];
+      ywrapper.StringValue description = 2 [(yext.schemapath) = "/sonic-portchannel/portchannel/portchannel-list/description"];
+      repeated ywrapper.StringValue members = 3 [(yext.schemapath) = "/sonic-portchannel/portchannel/portchannel-list/members"];
+      ywrapper.UintValue min_links = 4 [(yext.schemapath) = "/sonic-portchannel/portchannel/portchannel-list/min-links"];
+      ywrapper.UintValue mtu = 5 [(yext.schemapath) = "/sonic-portchannel/portchannel/portchannel-list/mtu"];
     }
     message PortchannelListKey {
       string portchannel_name = 1 [(yext.schemapath) = "/sonic-portchannel/portchannel/portchannel-list/portchannel-name"];
       PortchannelList portchannel_list = 2;
     }
-    repeated PortchannelListKey portchannel_list = 118674730 [(yext.schemapath) = "/sonic-portchannel/portchannel/portchannel-list"];
+    repeated PortchannelListKey portchannel_list = 1 [(yext.schemapath) = "/sonic-portchannel/portchannel/portchannel-list"];
   }
-  Portchannel portchannel = 36582390 [(yext.schemapath) = "/sonic-portchannel/portchannel"];
+  message PortchannelInterface {
+    message PortchannelInterfaceIpprefixList {
+      enum Scope {
+        SCOPE_UNSET = 0;
+        SCOPE_global = 1 [(yext.yang_name) = "global"];
+        SCOPE_local = 2 [(yext.yang_name) = "local"];
+      }
+      sonic.SonicTypesIpFamily family = 1 [(yext.schemapath) = "/sonic-portchannel/portchannel-interface/portchannel-interface-ipprefix-list/family"];
+      Scope scope = 2 [(yext.schemapath) = "/sonic-portchannel/portchannel-interface/portchannel-interface-ipprefix-list/scope"];
+    }
+    message PortchannelInterfaceIpprefixListKey {
+      string portchannel_name = 1 [(yext.schemapath) = "/sonic-portchannel/portchannel-interface/portchannel-interface-ipprefix-list/portchannel-name"];
+      string ip_prefix = 2 [(yext.schemapath) = "/sonic-portchannel/portchannel-interface/portchannel-interface-ipprefix-list/ip-prefix"];
+      PortchannelInterfaceIpprefixList portchannel_interface_ipprefix_list = 3;
+    }
+    message PortchannelInterfaceList {
+      ywrapper.StringValue vrf_name = 1 [(yext.schemapath) = "/sonic-portchannel/portchannel-interface/portchannel-interface-list/vrf-name"];
+    }
+    message PortchannelInterfaceListKey {
+      string portchannel_name = 1 [(yext.schemapath) = "/sonic-portchannel/portchannel-interface/portchannel-interface-list/portchannel-name"];
+      PortchannelInterfaceList portchannel_interface_list = 2;
+    }
+    repeated PortchannelInterfaceIpprefixListKey portchannel_interface_ipprefix_list = 1 [(yext.schemapath) = "/sonic-portchannel/portchannel-interface/portchannel-interface-ipprefix-list"];
+    repeated PortchannelInterfaceListKey portchannel_interface_list = 2 [(yext.schemapath) = "/sonic-portchannel/portchannel-interface/portchannel-interface-list"];
+  }
+  message PortchannelMember {
+    message PortchannelMemberList {
+    }
+    message PortchannelMemberListKey {
+      string portchannel_name = 1 [(yext.schemapath) = "/sonic-portchannel/portchannel-member/portchannel-member-list/portchannel-name"];
+      string port = 2 [(yext.schemapath) = "/sonic-portchannel/portchannel-member/portchannel-member-list/port"];
+      PortchannelMemberList portchannel_member_list = 3;
+    }
+    repeated PortchannelMemberListKey portchannel_member_list = 1 [(yext.schemapath) = "/sonic-portchannel/portchannel-member/portchannel-member-list"];
+  }
+  Portchannel portchannel = 1 [(yext.schemapath) = "/sonic-portchannel/portchannel"];
+  PortchannelInterface portchannel_interface = 2 [(yext.schemapath) = "/sonic-portchannel/portchannel-interface"];
+  PortchannelMember portchannel_member = 3 [(yext.schemapath) = "/sonic-portchannel/portchannel-member"];
 }

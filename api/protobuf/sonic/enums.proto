@@ -2,22 +2,25 @@
 // representation of a YANG schema.
 //
 // Input schema modules:
-//  - ../api/yang/sonic/sonic-acl.yang
+//  - ../api/yang/sonic/sonic-platform.yang
+//  - ../api/yang/sonic/sonic-interface.yang
 //  - ../api/yang/sonic/sonic-port.yang
-//  - ../api/yang/sonic/sonic-types.yang
-//  - ../api/yang/sonic/sonic-portchannel.yang
-//  - ../api/yang/sonic/sonic-platform-types.yang
-//  - ../api/yang/sonic/sonic-lldp-types.yang
-//  - ../api/yang/sonic/third_party/ietf/iana-if-type.yang
-//  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
+//  - ../api/yang/sonic/sonic-vrf.yang
 //  - ../api/yang/sonic/third_party/ietf/ietf-interfaces.yang
 //  - ../api/yang/sonic/third_party/ietf/ietf-yang-types.yang
-//  - ../api/yang/sonic/sonic-vlan.yang
-//  - ../api/yang/sonic/sonic-lldp.yang
-//  - ../api/yang/sonic/sonic-interface.yang
+//  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
+//  - ../api/yang/sonic/third_party/ietf/iana-if-type.yang
 //  - ../api/yang/sonic/sonic-loopback-interface.yang
-//  - ../api/yang/sonic/sonic-platform.yang
+//  - ../api/yang/sonic/sonic-platform-types.yang
+//  - ../api/yang/sonic/sonic-lldp-types.yang
+//  - ../api/yang/sonic/sonic-lldp.yang
+//  - ../api/yang/sonic/sonic-vlan.yang
+//  - ../api/yang/sonic/sonic-portchannel.yang
 //  - ../api/yang/sonic/sonic-extension.yang
+//  - ../api/yang/sonic/sonic-bgp.yang
+//  - ../api/yang/sonic/sonic-vxlan.yang
+//  - ../api/yang/sonic/sonic-acl.yang
+//  - ../api/yang/sonic/sonic-types.yang
 syntax = "proto3";
 
 package sonic;
@@ -27,77 +30,28 @@ option go_package = ".;sonic";
 import "ywrapper.proto";
 import "yext.proto";
 
-// SonicAclAclTableType represents an enumerated type generated for the YANG enumerated type acl-table-type.
-enum SonicAclAclTableType {
-  SONICACLACLTABLETYPE_UNSET = 0;
-  SONICACLACLTABLETYPE_L2 = 1 [(yext.yang_name) = "L2"];
-  SONICACLACLTABLETYPE_L3 = 2 [(yext.yang_name) = "L3"];
-  SONICACLACLTABLETYPE_L3V6 = 3 [(yext.yang_name) = "L3V6"];
-  SONICACLACLTABLETYPE_MIRROR = 4 [(yext.yang_name) = "MIRROR"];
-  SONICACLACLTABLETYPE_MIRRORV6 = 5 [(yext.yang_name) = "MIRRORV6"];
-  SONICACLACLTABLETYPE_MIRROR_DSCP = 6 [(yext.yang_name) = "MIRROR_DSCP"];
-  SONICACLACLTABLETYPE_CTRLPLANE = 7 [(yext.yang_name) = "CTRLPLANE"];
+// SonicLldpTypesChassisIdType represents an enumerated type generated for the YANG enumerated type chassis-id-type.
+enum SonicLldpTypesChassisIdType {
+  SONICLLDPTYPESCHASSISIDTYPE_UNSET = 0;
+  SONICLLDPTYPESCHASSISIDTYPE_CHASSIS_COMPONENT = 1 [(yext.yang_name) = "CHASSIS_COMPONENT"];
+  SONICLLDPTYPESCHASSISIDTYPE_INTERFACE_ALIAS = 2 [(yext.yang_name) = "INTERFACE_ALIAS"];
+  SONICLLDPTYPESCHASSISIDTYPE_PORT_COMPONENT = 3 [(yext.yang_name) = "PORT_COMPONENT"];
+  SONICLLDPTYPESCHASSISIDTYPE_MAC_ADDRESS = 4 [(yext.yang_name) = "MAC_ADDRESS"];
+  SONICLLDPTYPESCHASSISIDTYPE_NETWORK_ADDRESS = 5 [(yext.yang_name) = "NETWORK_ADDRESS"];
+  SONICLLDPTYPESCHASSISIDTYPE_INTERFACE_NAME = 6 [(yext.yang_name) = "INTERFACE_NAME"];
+  SONICLLDPTYPESCHASSISIDTYPE_LOCAL = 7 [(yext.yang_name) = "LOCAL"];
 }
 
-// SonicAclIpType represents an enumerated type generated for the YANG enumerated type ip-type.
-enum SonicAclIpType {
-  SONICACLIPTYPE_UNSET = 0;
-  SONICACLIPTYPE_ANY = 1 [(yext.yang_name) = "ANY"];
-  SONICACLIPTYPE_IP = 2 [(yext.yang_name) = "IP"];
-  SONICACLIPTYPE_NON_IP = 3 [(yext.yang_name) = "NON_IP"];
-  SONICACLIPTYPE_IPV4 = 4 [(yext.yang_name) = "IPV4"];
-  SONICACLIPTYPE_IPV6 = 5 [(yext.yang_name) = "IPV6"];
-  SONICACLIPTYPE_IPv4ANY = 6 [(yext.yang_name) = "IPv4ANY"];
-  SONICACLIPTYPE_NON_IP4 = 7 [(yext.yang_name) = "NON_IP4"];
-  SONICACLIPTYPE_IPv6ANY = 8 [(yext.yang_name) = "IPv6ANY"];
-  SONICACLIPTYPE_NON_IPv6 = 9 [(yext.yang_name) = "NON_IPv6"];
-  SONICACLIPTYPE_ARP = 10 [(yext.yang_name) = "ARP"];
-}
-
-// SonicAclPacketAction represents an enumerated type generated for the YANG enumerated type packet-action.
-enum SonicAclPacketAction {
-  SONICACLPACKETACTION_UNSET = 0;
-  SONICACLPACKETACTION_DROP = 1 [(yext.yang_name) = "DROP"];
-  SONICACLPACKETACTION_FORWARD = 2 [(yext.yang_name) = "FORWARD"];
-  SONICACLPACKETACTION_REDIRECT = 3 [(yext.yang_name) = "REDIRECT"];
-}
-
-// SonicInterfaceIpFamily represents an enumerated type generated for the YANG enumerated type ip-family.
-enum SonicInterfaceIpFamily {
-  SONICINTERFACEIPFAMILY_UNSET = 0;
-  SONICINTERFACEIPFAMILY_IPv4 = 1 [(yext.yang_name) = "IPv4"];
-  SONICINTERFACEIPFAMILY_IPv6 = 2 [(yext.yang_name) = "IPv6"];
-}
-
-// SonicLldpChassisIdType represents an enumerated type generated for the YANG enumerated type chassis-id-type.
-enum SonicLldpChassisIdType {
-  SONICLLDPCHASSISIDTYPE_UNSET = 0;
-  SONICLLDPCHASSISIDTYPE_CHASSIS_COMPONENT = 1 [(yext.yang_name) = "CHASSIS_COMPONENT"];
-  SONICLLDPCHASSISIDTYPE_INTERFACE_ALIAS = 2 [(yext.yang_name) = "INTERFACE_ALIAS"];
-  SONICLLDPCHASSISIDTYPE_PORT_COMPONENT = 3 [(yext.yang_name) = "PORT_COMPONENT"];
-  SONICLLDPCHASSISIDTYPE_MAC_ADDRESS = 4 [(yext.yang_name) = "MAC_ADDRESS"];
-  SONICLLDPCHASSISIDTYPE_NETWORK_ADDRESS = 5 [(yext.yang_name) = "NETWORK_ADDRESS"];
-  SONICLLDPCHASSISIDTYPE_INTERFACE_NAME = 6 [(yext.yang_name) = "INTERFACE_NAME"];
-  SONICLLDPCHASSISIDTYPE_LOCAL = 7 [(yext.yang_name) = "LOCAL"];
-}
-
-// SonicLldpPortIdType represents an enumerated type generated for the YANG enumerated type port-id-type.
-enum SonicLldpPortIdType {
-  SONICLLDPPORTIDTYPE_UNSET = 0;
-  SONICLLDPPORTIDTYPE_INTERFACE_ALIAS = 1 [(yext.yang_name) = "INTERFACE_ALIAS"];
-  SONICLLDPPORTIDTYPE_PORT_COMPONENT = 2 [(yext.yang_name) = "PORT_COMPONENT"];
-  SONICLLDPPORTIDTYPE_MAC_ADDRESS = 3 [(yext.yang_name) = "MAC_ADDRESS"];
-  SONICLLDPPORTIDTYPE_NETWORK_ADDRESS = 4 [(yext.yang_name) = "NETWORK_ADDRESS"];
-  SONICLLDPPORTIDTYPE_INTERFACE_NAME = 5 [(yext.yang_name) = "INTERFACE_NAME"];
-  SONICLLDPPORTIDTYPE_AGENT_CIRCUIT_ID = 6 [(yext.yang_name) = "AGENT_CIRCUIT_ID"];
-  SONICLLDPPORTIDTYPE_LOCAL = 7 [(yext.yang_name) = "LOCAL"];
-}
-
-// SonicLoopbackInterfaceIpFamily represents an enumerated type generated for the YANG enumerated type ip-family.
-enum SonicLoopbackInterfaceIpFamily {
-  SONICLOOPBACKINTERFACEIPFAMILY_UNSET = 0;
-  SONICLOOPBACKINTERFACEIPFAMILY_IPv4 = 1 [(yext.yang_name) = "IPv4"];
-  SONICLOOPBACKINTERFACEIPFAMILY_IPv6 = 2 [(yext.yang_name) = "IPv6"];
+// SonicLldpTypesPortIdType represents an enumerated type generated for the YANG enumerated type port-id-type.
+enum SonicLldpTypesPortIdType {
+  SONICLLDPTYPESPORTIDTYPE_UNSET = 0;
+  SONICLLDPTYPESPORTIDTYPE_INTERFACE_ALIAS = 1 [(yext.yang_name) = "INTERFACE_ALIAS"];
+  SONICLLDPTYPESPORTIDTYPE_PORT_COMPONENT = 2 [(yext.yang_name) = "PORT_COMPONENT"];
+  SONICLLDPTYPESPORTIDTYPE_MAC_ADDRESS = 3 [(yext.yang_name) = "MAC_ADDRESS"];
+  SONICLLDPTYPESPORTIDTYPE_NETWORK_ADDRESS = 4 [(yext.yang_name) = "NETWORK_ADDRESS"];
+  SONICLLDPTYPESPORTIDTYPE_INTERFACE_NAME = 5 [(yext.yang_name) = "INTERFACE_NAME"];
+  SONICLLDPTYPESPORTIDTYPE_AGENT_CIRCUIT_ID = 6 [(yext.yang_name) = "AGENT_CIRCUIT_ID"];
+  SONICLLDPTYPESPORTIDTYPE_LOCAL = 7 [(yext.yang_name) = "LOCAL"];
 }
 
 // SonicPlatformTypesSONICHARDWARECOMPONENT represents an enumerated type generated for the YANG identity SONIC_HARDWARE_COMPONENT.
@@ -114,45 +68,66 @@ enum SonicPlatformTypesSONICSOFTWARECOMPONENT {
   SONICPLATFORMTYPESSONICSOFTWARECOMPONENT_OPERATING_SYSTEM = 527639718 [(yext.yang_name) = "OPERATING_SYSTEM"];
 }
 
-// SonicPortAdminStatus represents an enumerated type generated for the YANG enumerated type admin-status.
-enum SonicPortAdminStatus {
-  SONICPORTADMINSTATUS_UNSET = 0;
-  SONICPORTADMINSTATUS_up = 1 [(yext.yang_name) = "up"];
-  SONICPORTADMINSTATUS_down = 2 [(yext.yang_name) = "down"];
+// SonicTypesAclTableType represents an enumerated type generated for the YANG enumerated type acl-table-type.
+enum SonicTypesAclTableType {
+  SONICTYPESACLTABLETYPE_UNSET = 0;
+  SONICTYPESACLTABLETYPE_L2 = 1 [(yext.yang_name) = "L2"];
+  SONICTYPESACLTABLETYPE_L3 = 2 [(yext.yang_name) = "L3"];
+  SONICTYPESACLTABLETYPE_L3V6 = 3 [(yext.yang_name) = "L3V6"];
+  SONICTYPESACLTABLETYPE_MIRROR = 4 [(yext.yang_name) = "MIRROR"];
+  SONICTYPESACLTABLETYPE_MIRRORV6 = 5 [(yext.yang_name) = "MIRRORV6"];
+  SONICTYPESACLTABLETYPE_MIRROR_DSCP = 6 [(yext.yang_name) = "MIRROR_DSCP"];
+  SONICTYPESACLTABLETYPE_CTRLPLANE = 7 [(yext.yang_name) = "CTRLPLANE"];
 }
 
-// SonicPortOperStatus represents an enumerated type generated for the YANG enumerated type oper-status.
-enum SonicPortOperStatus {
-  SONICPORTOPERSTATUS_UNSET = 0;
-  SONICPORTOPERSTATUS_up = 1 [(yext.yang_name) = "up"];
-  SONICPORTOPERSTATUS_down = 2 [(yext.yang_name) = "down"];
+// SonicTypesAdminStatus represents an enumerated type generated for the YANG enumerated type admin-status.
+enum SonicTypesAdminStatus {
+  SONICTYPESADMINSTATUS_UNSET = 0;
+  SONICTYPESADMINSTATUS_up = 1 [(yext.yang_name) = "up"];
+  SONICTYPESADMINSTATUS_down = 2 [(yext.yang_name) = "down"];
 }
 
-// SonicPortchannelAdminStatus represents an enumerated type generated for the YANG enumerated type admin-status.
-enum SonicPortchannelAdminStatus {
-  SONICPORTCHANNELADMINSTATUS_UNSET = 0;
-  SONICPORTCHANNELADMINSTATUS_up = 1 [(yext.yang_name) = "up"];
-  SONICPORTCHANNELADMINSTATUS_down = 2 [(yext.yang_name) = "down"];
+// SonicTypesIpFamily represents an enumerated type generated for the YANG enumerated type ip-family.
+enum SonicTypesIpFamily {
+  SONICTYPESIPFAMILY_UNSET = 0;
+  SONICTYPESIPFAMILY_IPv4 = 1 [(yext.yang_name) = "IPv4"];
+  SONICTYPESIPFAMILY_IPv6 = 2 [(yext.yang_name) = "IPv6"];
 }
 
-// SonicVlanAdminStatus represents an enumerated type generated for the YANG enumerated type admin-status.
-enum SonicVlanAdminStatus {
-  SONICVLANADMINSTATUS_UNSET = 0;
-  SONICVLANADMINSTATUS_up = 1 [(yext.yang_name) = "up"];
-  SONICVLANADMINSTATUS_down = 2 [(yext.yang_name) = "down"];
+// SonicTypesIpType represents an enumerated type generated for the YANG enumerated type ip-type.
+enum SonicTypesIpType {
+  SONICTYPESIPTYPE_UNSET = 0;
+  SONICTYPESIPTYPE_ANY = 1 [(yext.yang_name) = "ANY"];
+  SONICTYPESIPTYPE_IP = 2 [(yext.yang_name) = "IP"];
+  SONICTYPESIPTYPE_NON_IP = 3 [(yext.yang_name) = "NON_IP"];
+  SONICTYPESIPTYPE_IPV4 = 4 [(yext.yang_name) = "IPV4"];
+  SONICTYPESIPTYPE_IPV6 = 5 [(yext.yang_name) = "IPV6"];
+  SONICTYPESIPTYPE_IPv4ANY = 6 [(yext.yang_name) = "IPv4ANY"];
+  SONICTYPESIPTYPE_NON_IP4 = 7 [(yext.yang_name) = "NON_IP4"];
+  SONICTYPESIPTYPE_IPv6ANY = 8 [(yext.yang_name) = "IPv6ANY"];
+  SONICTYPESIPTYPE_NON_IPv6 = 9 [(yext.yang_name) = "NON_IPv6"];
+  SONICTYPESIPTYPE_ARP = 10 [(yext.yang_name) = "ARP"];
 }
 
-// SonicVlanIpFamily represents an enumerated type generated for the YANG enumerated type ip-family.
-enum SonicVlanIpFamily {
-  SONICVLANIPFAMILY_UNSET = 0;
-  SONICVLANIPFAMILY_IPv4 = 1 [(yext.yang_name) = "IPv4"];
-  SONICVLANIPFAMILY_IPv6 = 2 [(yext.yang_name) = "IPv6"];
+// SonicTypesOperStatus represents an enumerated type generated for the YANG enumerated type oper-status.
+enum SonicTypesOperStatus {
+  SONICTYPESOPERSTATUS_UNSET = 0;
+  SONICTYPESOPERSTATUS_up = 1 [(yext.yang_name) = "up"];
+  SONICTYPESOPERSTATUS_down = 2 [(yext.yang_name) = "down"];
 }
 
-// SonicVlanVlanTaggingMode represents an enumerated type generated for the YANG enumerated type vlan-tagging-mode.
-enum SonicVlanVlanTaggingMode {
-  SONICVLANVLANTAGGINGMODE_UNSET = 0;
-  SONICVLANVLANTAGGINGMODE_tagged = 1 [(yext.yang_name) = "tagged"];
-  SONICVLANVLANTAGGINGMODE_untagged = 2 [(yext.yang_name) = "untagged"];
-  SONICVLANVLANTAGGINGMODE_priority_tagged = 3 [(yext.yang_name) = "priority_tagged"];
+// SonicTypesPacketAction represents an enumerated type generated for the YANG enumerated type packet-action.
+enum SonicTypesPacketAction {
+  SONICTYPESPACKETACTION_UNSET = 0;
+  SONICTYPESPACKETACTION_DROP = 1 [(yext.yang_name) = "DROP"];
+  SONICTYPESPACKETACTION_FORWARD = 2 [(yext.yang_name) = "FORWARD"];
+  SONICTYPESPACKETACTION_REDIRECT = 3 [(yext.yang_name) = "REDIRECT"];
+}
+
+// SonicTypesVlanTaggingMode represents an enumerated type generated for the YANG enumerated type vlan-tagging-mode.
+enum SonicTypesVlanTaggingMode {
+  SONICTYPESVLANTAGGINGMODE_UNSET = 0;
+  SONICTYPESVLANTAGGINGMODE_tagged = 1 [(yext.yang_name) = "tagged"];
+  SONICTYPESVLANTAGGINGMODE_untagged = 2 [(yext.yang_name) = "untagged"];
+  SONICTYPESVLANTAGGINGMODE_priority_tagged = 3 [(yext.yang_name) = "priority_tagged"];
 }
