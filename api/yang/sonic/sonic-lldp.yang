@@ -1,139 +1,155 @@
 module sonic-lldp {
 
-    yang-version 1.1;
+  yang-version 1.1;
 
-    namespace "http://github.com/Azure/sonic-lldp";
-    prefix lldp;
+  namespace "http://github.com/Azure/sonic-lldp";
+  prefix lldp;
 
-    import sonic-lldp-types {
-        prefix lldp-types;
-    }
+  import ietf-yang-types {
+    prefix yang;
+  }
 
-    description "LLDP yang Module for SONiC OS";
+  import sonic-types {
+    prefix stypes;
+    revision-date 2019-07-01;
+  }
 
-    revision 2019-08-10 {
+  import sonic-port {
+    prefix port;
+    revision-date 2019-07-01;
+  }
+
+  description "LLDP yang Module for SONiC OS";
+
+  revision 2020-01-19 {
+    description "First Revision";
+  }
+
+  container sonic-lldp {
+    
+    container lldp {
+      
+      list lldp-list {
+
+        key "port-name";
         
-        description "First Revision";
+        leaf port-name {
+          type leafref {
+            path /port:sonic-port/port:port/port:port-list/port:port-name;
+          }
+        }
+        
+        container state {
+
+          leaf lldp_rem_port_desc {
+            type string {
+              length 0..255;
+            }
+          }
+
+          leaf lldp_rem_port_id {
+            type string {
+              length 1..255;
+            }
+          }
+
+          leaf lldp_rem_port_id_subtype {
+            type enumeration {
+              enum IFALIAS;
+              enum PORT;
+              enum LLADDR;
+              enum ADDR;
+              enum IFNAME;
+              enum AGENTCID;
+              enum LOCAL;
+            }
+          }
+          
+          leaf lldp_rem_man_addr {
+            type string {
+              length 1..128;
+            }
+          }
+
+          leaf lldp_rem_time_mark {
+            type yang:timestamp;
+          }
+
+          leaf lldp_rem_chassis_id_subtype {
+            type enumeration {
+              enum CHASSIS;
+              enum IFALIAS;
+              enum PORT;
+              enum LLADDR;
+              enum ADDR;
+              enum IFNAME;
+              enum LOCAL;
+            }
+          }
+
+          leaf lldp_rem_sys_cap_enabled {
+            /*type bits {
+              bit other {
+                position 0;
+              }
+              
+              bit repeater {
+                position 1;
+              }
+      
+              bit bridge {
+                position 2;
+              }
+      
+              bit wlan-access-point {
+                position 3;
+              }
+      
+              bit router {
+                position 4;
+              }
+      
+              bit telephone {
+                position 5;
+              }
+      
+              bit docsis-cable-device {
+                position 6;
+              }
+      
+              bit station-only {
+                position 7;
+              }
+            }*/
+            type uint32;
+          }
+
+          leaf lldp_rem_sys_name {
+            type string {
+              length 0..255;
+            }
+          }
+
+          leaf lldp_rem_chassis_id {
+            type string;
+          }
+
+          leaf lldp_rem_index {
+            type uint32;
+          }
+
+          leaf lldp_rem_sys_desc {
+            type string {
+              length 0..255;
+            }
+          }
+
+          leaf lldp_rem_sys_cap_supported {
+            //type stypes:lldp-system-capability;
+            type uint32;
+          }
+        }
+      }
     }
-
-    container sonic-lldp {
-
-        grouping lldp-config {
-
-            description "Configuration data for LLDP parameters";
-        }
-
-        grouping lldp-state {
-
-            description "Operational state data for global LLDP parameters";
-
-            leaf chassis-id {
-
-                description "Identify the chassis component of the endpoint";
-
-                type string;
-            }
-
-            leaf chassis-id-type {
-
-                description "Identify the format and source of the chassis identifier string.";
-
-                type lldp-types:chassis-id-type;
-            }
-
-            leaf system-name {
-
-                description "The system name field";
-
-                type string {
-                    length 0..255;
-                }
-            }
-
-            leaf system-description {
-
-                description "The system description field";
-
-                type string {
-                    length 0..255;
-                }
-            }
-
-            leaf port-id {
-                
-                description "Identify the port component of the endpoint";
-
-                type string;
-            }
-
-            leaf port-id-type {
-
-                description "Identify the format and source of the port identifier string";
-
-                type lldp-types:port-id-type;
-            }
-
-            leaf port-description {
-
-                description "The actual port identifier for the port which this LLDP PDU was transmited";
-
-                type string;
-            }
-
-            leaf local-port {
-
-                description "Identify the port component of local";
-
-                type string;
-            }
-
-            leaf age {
-
-                description "Age since discovery";
-
-                type uint64;
-                units "seconds";
-            }
-
-            leaf index {
-
-                description "Discovery index";
-
-                type uint32;
-            }
-        }
-
-        container lldp {
-
-            description "Top-level container for LLDP configuration and state data";
-
-            list device-list {
-
-                description "list of device, keyed by device name.";
-
-                key "device-name";
-
-                leaf device-name {
-                    type string {
-                        length 1..128;
-                    }
-                }
-
-                container config {
-
-                    description "Configuration data for lldp";
-
-                    uses lldp-config;
-                }
-
-                container state {
-
-                    description "Operational state data for lldp";
-
-                    uses lldp-state;
-                }
-            }
-        }
-    }
-
+  }
 }

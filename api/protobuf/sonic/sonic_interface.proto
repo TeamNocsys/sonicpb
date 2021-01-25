@@ -2,22 +2,28 @@
 // representation of a YANG schema.
 //
 // Input schema modules:
-//  - ../api/yang/sonic/sonic-acl.yang
+//  - ../api/yang/sonic/sonic-platform.yang
+//  - ../api/yang/sonic/sonic-interface.yang
 //  - ../api/yang/sonic/sonic-port.yang
-//  - ../api/yang/sonic/sonic-types.yang
-//  - ../api/yang/sonic/sonic-portchannel.yang
-//  - ../api/yang/sonic/sonic-platform-types.yang
-//  - ../api/yang/sonic/sonic-lldp-types.yang
-//  - ../api/yang/sonic/third_party/ietf/iana-if-type.yang
-//  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
+//  - ../api/yang/sonic/sonic-ntp.yang
+//  - ../api/yang/sonic/sonic-vrf.yang
 //  - ../api/yang/sonic/third_party/ietf/ietf-interfaces.yang
 //  - ../api/yang/sonic/third_party/ietf/ietf-yang-types.yang
-//  - ../api/yang/sonic/sonic-vlan.yang
-//  - ../api/yang/sonic/sonic-lldp.yang
-//  - ../api/yang/sonic/sonic-interface.yang
+//  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
+//  - ../api/yang/sonic/third_party/ietf/iana-if-type.yang
 //  - ../api/yang/sonic/sonic-loopback-interface.yang
-//  - ../api/yang/sonic/sonic-platform.yang
+//  - ../api/yang/sonic/sonic-platform-types.yang
+//  - ../api/yang/sonic/sonic-neighbor.yang
+//  - ../api/yang/sonic/sonic-route.yang
+//  - ../api/yang/sonic/sonic-lldp.yang
+//  - ../api/yang/sonic/sonic-vlan.yang
+//  - ../api/yang/sonic/sonic-portchannel.yang
 //  - ../api/yang/sonic/sonic-extension.yang
+//  - ../api/yang/sonic/sonic-mirror-session.yang
+//  - ../api/yang/sonic/sonic-vxlan.yang
+//  - ../api/yang/sonic/sonic-fdb.yang
+//  - ../api/yang/sonic/sonic-acl.yang
+//  - ../api/yang/sonic/sonic-types.yang
 syntax = "proto3";
 
 package sonic;
@@ -36,8 +42,8 @@ message SonicInterface {
         SCOPE_global = 1 [(yext.yang_name) = "global"];
         SCOPE_local = 2 [(yext.yang_name) = "local"];
       }
-      sonic.SonicInterfaceIpFamily family = 157275605 [(yext.schemapath) = "/sonic-interface/interface/interface-ipprefix-list/family"];
-      Scope scope = 49312695 [(yext.schemapath) = "/sonic-interface/interface/interface-ipprefix-list/scope"];
+      sonic.SonicTypesIpFamily family = 1 [(yext.schemapath) = "/sonic-interface/interface/interface-ipprefix-list/family"];
+      Scope scope = 2 [(yext.schemapath) = "/sonic-interface/interface/interface-ipprefix-list/scope"];
     }
     message InterfaceIpprefixListKey {
       string port_name = 1 [(yext.schemapath) = "/sonic-interface/interface/interface-ipprefix-list/port-name"];
@@ -45,14 +51,14 @@ message SonicInterface {
       InterfaceIpprefixList interface_ipprefix_list = 3;
     }
     message InterfaceList {
-      ywrapper.StringValue vrf_name = 193384515 [(yext.schemapath) = "/sonic-interface/interface/interface-list/vrf-name"];
+      ywrapper.StringValue vrf_name = 1 [(yext.schemapath) = "/sonic-interface/interface/interface-list/vrf-name"];
     }
     message InterfaceListKey {
       string port_name = 1 [(yext.schemapath) = "/sonic-interface/interface/interface-list/port-name"];
       InterfaceList interface_list = 2;
     }
-    repeated InterfaceIpprefixListKey interface_ipprefix_list = 163932438 [(yext.schemapath) = "/sonic-interface/interface/interface-ipprefix-list"];
-    repeated InterfaceListKey interface_list = 516396642 [(yext.schemapath) = "/sonic-interface/interface/interface-list"];
+    repeated InterfaceIpprefixListKey interface_ipprefix_list = 1 [(yext.schemapath) = "/sonic-interface/interface/interface-ipprefix-list"];
+    repeated InterfaceListKey interface_list = 2 [(yext.schemapath) = "/sonic-interface/interface/interface-list"];
   }
-  Interface interface = 87274325 [(yext.schemapath) = "/sonic-interface/interface"];
+  Interface interface = 1 [(yext.schemapath) = "/sonic-interface/interface"];
 }

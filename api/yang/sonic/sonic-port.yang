@@ -1,215 +1,150 @@
 module sonic-port{
 
-	yang-version 1.1;
+  yang-version 1.1;
 
-	namespace "http://github.com/Azure/sonic-port";
-	prefix port;
+  namespace "http://github.com/Azure/sonic-port";
+  prefix port;
 
-	import ietf-yang-types {
-		prefix yang;
-	}
+  import ietf-yang-types {
+    prefix yang;
+  }
 
-	import ietf-inet-types {
-		prefix inet;
-	}
+  import sonic-types {
+    prefix stypes;
+    revision-date 2019-07-01;
+  }
 
-	import sonic-types {
-		prefix stypes;
-		revision-date 2019-07-01;
-	}
+  description "PORT yang Module for SONiC OS";
 
-	import sonic-extension {
-		prefix ext;
-		revision-date 2019-07-01;
-	}
+  revision 2020-01-20 {
+    description "First Revision";
+  }
 
-	description "PORT yang Module for SONiC OS";
+  container sonic-port{
 
-	revision 2019-07-01 {
-		description "First Revision";
-	}
+    container port {
 
-	container sonic-port{
+      description "PORT part of config_db.json";
 
-		container port {
+      list port-list {
 
-			description "PORT part of config_db.json";
+        key "port-name";
 
-			list port-list {
+        leaf port-name {
+          type string {
+            length 1..128;
+          }
+        }
+        
+        leaf index {
+          type uint32;
+        }
+        
+        leaf lanes {
+          type string {
+            length 1..128;
+          }
+        }
+        
+        leaf mtu {
+          type uint16 {
+            range 1..9216;
+          }
+        }
 
-				key "port-name";
+        leaf alias {
+          type string {
+            length 1..128;
+          }
+        }
+        
+        leaf admin-status {
+          type stypes:admin-status;
+        }
 
-				ext:key-regex-configdb-to-yang "^(Ethernet[0-9]+)$";
+        leaf speed {
+          type uint32 {
+            range 1..100000;
+          }
+        }
 
-				ext:key-regex-yang-to-configdb "<port-name>";
+        container state {
+          leaf oper-status {
+            type stypes:oper-status;
+          }
+          
+          leaf mac {
+            type yang:mac-address; 
+          }
+        }
+      }
+      /* end of list port-list */
 
-				leaf port-name {
-					type string {
-						length 1..128;
-					}
-				}
+      list port-statistics-list {
+        key "port-name";
 
-				leaf alias {
-					type string {
-						length 1..128;
-					}
-				}
+        leaf port-name {
+          type leafref {
+            path /port:sonic-port/port:port/port:port-list/port:port-name;
+          }
+        }
 
-				leaf lanes {
-					mandatory true;
-					type string {
-						length 1..128;
-					}
-				}
+        leaf in-octets {
+          type yang:counter64;
+        }
 
-				leaf description {
-					type string {
-						length 0..255;
-					}
-				}
+        leaf in-unicast-pkts {
+          type yang:counter64;
+        }
 
-				leaf speed {
-					mandatory true;
-					type uint32 {
-						range 1..100000;
-					}
-				}
+        leaf in-multicast-pkts {
+          type yang:counter64;
+        }
 
-				leaf mtu {
-					type uint16 {
-						range 1..9216;
-					}
-				}
+        leaf in-broadcast-pkts {
+          type yang:counter64;
+        }
 
-				leaf index {
-					type uint16 {
-						range 0..256;
-					}
-				}
+        leaf in-discards {
+          type yang:counter32;
+        }
 
-				leaf admin-status {
-					type stypes:admin-status;
-				}
+        leaf in-errors {
+          type yang:counter32;
+        }
+            
+        leaf in-unknown-protos {
+          type yang:counter32;
+        }
 
-				leaf fec {
-					type string {
-						pattern "rc|fc|None";
-					}
-				}
-			} /* end of list PORT_LIST */
+        leaf out-octets {
+          type yang:counter64;
+        }
+            
+        leaf out-unicast-pkts {
+          type yang:counter64;
+        }
 
-			list port-state-list {
-			    config false;
+        leaf out-multicast-pkts {
+          type yang:counter64;
+        }
 
-			    key "port-name";
+        leaf out-broadcast-pkts {
+          type yang:counter64;
+        }
 
-				leaf port-name {
-					type string {
-						length 1..128;
-					}
-				}
+        leaf out-discards {
+          type yang:counter32;
+        }
 
-				leaf alias {
-					type string {
-						length 1..128;
-					}
-				}
+        leaf out-errors {
+          type yang:counter32;
+        }
+      }
+      /* end of list port-statistics-list */
 
-				leaf description {
-					type string {
-						length 0..255;
-					}
-				}
+    } /* end of container port */
 
-				leaf speed {
-					mandatory true;
-					type uint32 {
-						range 1..100000;
-					}
-				}
-
-				leaf mtu {
-					type uint16 {
-						range 1..9216;
-					}
-				}
-
-				leaf index {
-					type uint16 {
-						range 0..256;
-					}
-				}
-
-				leaf admin-status {
-					type stypes:admin-status;
-				}
-
-				leaf oper-status {
-					type stypes:oper-status;
-				}
-
-				container counters {
-				    leaf in-octets {
-				        type uint64;
-				    }
-
-				    leaf in-pkts {
-				        type uint64;
-				    }
-
-				    leaf in-unicast-pkts {
-				        type uint64;
-				    }
-
-				    leaf in-broadcast-pkts {
-				        type uint64;
-				    }
-
-				    leaf in-multicast-pkts {
-				        type uint64;
-				    }
-
-				    leaf in-discards {
-				        type uint64;
-				    }
-
-				    leaf in-errors {
-				        type uint64;
-				    }
-
-				    leaf out-octets {
-				        type uint64;
-				    }
-
-				    leaf out-pkts {
-				        type uint64;
-				    }
-
-				    leaf out-unicast-pkts {
-				        type uint64;
-				    }
-
-				    leaf out-broadcast-pkts {
-				        type uint64;
-				    }
-
-				    leaf out-multicast-pkts {
-				        type uint64;
-				    }
-
-				    leaf out-discards {
-				        type uint64;
-				    }
-
-				    leaf out-errors {
-				        type uint64;
-				    }
-				} /* end of container COUNTERS */
-
-			} /* end of list PORT_STATE_LIST */
-
-		} /* end of container PORT */
-
-	} /* end of container sonic-port */
+  } /* end of container sonic-port */
 
 } /* end of module sonic-port */

@@ -11,14 +11,16 @@ $ go env -w GOPROXY=https://goproxy.io,direct
 > 下载YANG编译工具
 
 ```shell
-$ GO111MODULE=off go get -u github.com/openconfig/ygot
+$ go env -w GO111MODULE=off
+$ go get -u github.com/openconfig/ygot@v0.9.0
+$ go env -w GO111MODULE=on
 ```
 
 > 配置编译环境
 
 ```shell
 $ sudo apt install -y protobuf-compiler
-$ go get -u google.golang.org/protobuf/protoc-gen-go
+$ go get -u google.golang.org/protobuf/cmd/protoc-gen-go@v1.25.0
 $ GO111MODULE=off go get -u github.com/google/protobuf
 ```
 
@@ -37,7 +39,7 @@ $ git clone  https://github.com/TeamNocsys/sonicpb.git
 1. 进入编译目录
 
 ```shell
-$ cd shell
+$ cd build
 ```
 
 2. 将YANG模型转换成Protobuf文件

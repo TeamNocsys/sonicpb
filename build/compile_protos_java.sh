@@ -5,10 +5,10 @@ proto_imports="../api/protobuf/sonic:${GOPATH}/src:${GOPATH}/src/github.com/goog
 java_output="jar/src/main/java"
 
 if [ ! -d "$java_output" ];then
-mkdir -p "$java_output"
+  mkdir -p "$java_output"
 else 
-path="$java_output""/[^.]*"
-rm -rf $path
+  path="$java_output""/[^.]*"
+  rm -rf $path
 fi
 
 if [ $# -eq 1 ];then

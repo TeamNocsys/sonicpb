@@ -1,211 +1,183 @@
 module sonic-vlan {
 
-	yang-version 1.1;
+  yang-version 1.1;
 
-	namespace "http://github.com/Azure/sonic-vlan";
-	prefix vlan;
+  namespace "http://github.com/Azure/sonic-vlan";
+  prefix vlan;
 
-	import ietf-yang-types {
-		prefix yang;
-	}
+  import ietf-yang-types {
+    prefix yang;
+  }
 
-	import ietf-inet-types {
-		prefix inet;
-	}
+  import ietf-inet-types {
+    prefix inet;
+  }
 
-	import sonic-types {
-		prefix stypes;
-		revision-date 2019-07-01;
-	}
+  import sonic-types {
+    prefix stypes;
+    revision-date 2019-07-01;
+  }
 
-	import sonic-extension {
-		prefix ext;
-		revision-date 2019-07-01;
-	}
+  import sonic-extension {
+    prefix ext;
+    revision-date 2019-07-01;
+  }
 
-	import sonic-port {
-		prefix port;
-		revision-date 2019-07-01;
-	}
+  import sonic-port {
+    prefix port;
+    revision-date 2019-07-01;
+  }
 
-	description "VLAN yang Module for SONiC OS";
+  description "VLAN yang Module for SONiC OS";
 
-	revision 2019-07-01 {
-		description "First Revision";
-	}
+  revision 2019-07-01 {
+    description "First Revision";
+  }
 
-	container sonic-vlan {
+  container sonic-vlan {
 
-		container vlan-interface {
+    container vlan {
 
-			description "VLAN_INTERFACE part of config_db.json";
+      description "VLAN part of config_db.json";
 
-			list vlan-interface-list {
+      list vlan-list {
 
-				description "VLAN INTERFACE part of config_db.json with vrf";
+        key "vlan-name";
 
-				key "vlan-name";
+        leaf vlan-name {
+          type string {
+            pattern 'Vlan([0-9]{1,3}|[0-3][0-9]{4}|[4][0][0-8][0-9]|[4][0][9][0-4])';
+          }
+        }
 
-				ext:key-regex-configdb-to-yang "^(Vlan[a-zA-Z0-9_-]+)$";
+        leaf vlanid {
+          type uint16 {
+            range 1..4094;
+          }
+        }
 
-				ext:key-regex-yang-to-configdb "<vlan-name>";
+        leaf description {
+          type string {
+            length 1..255;
+          }
+        }
 
-				leaf vlan-name {
-					type leafref {
-						path /vlan:sonic-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name;
-					}
-				}
+        leaf-list dhcp-servers {
+          type inet:ip-address;
+        }
 
-				leaf vrf_name {
-					type string {
-						pattern "Vrf[a-zA-Z0-9_-]+";
-						length 3..255;
-					}
-				}
-			}
-			/* end of VLAN_INTERFACE_LIST */
+        leaf mtu {
+          type uint16 {
+            range 1..9216;
+          }
+        }
 
-			list vlan-interface-ipprefix-list {
+        leaf admin-status {
+          type stypes:admin-status;
+        }
 
-				key "vlan-name ip-prefix";
+        leaf-list members {
+          /* leaf-list members are unique by default */
 
-				ext:key-regex-configdb-to-yang "^(Vlan[a-zA-Z0-9_-]+)|([a-fA-F0-9:./]+$)";
+          type leafref {
+            path "/port:sonic-port/port:port/port:port-list/port:port-name";
+          }
+        }
+      }
+      /* end of VLAN_LIST */
+    }
+    /* end of container VLAN */
 
-				ext:key-regex-yang-to-configdb "<vlan-name>|<ip-prefix>";
+    container vlan-member {
 
-				leaf vlan-name {
-					/* This node must be present in VLAN_INTERFACE_LIST */
-					must "(current() = ../../vlan-interface-list[vlan_name=current()]/vlan-name)"
-					{
-						error-message "Must condition not satisfied, Try adding Vlan<vlanid>: {}, Example: 'Vlan100': {}";
-					}
+      description "VLAN_MEMBER part of config_db.json";
 
-					type leafref {
-						path "/vlan:sonic-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name";
-					}
-				}
+      list vlan-member-list {
 
-				leaf ip-prefix {
-					type union {
-						type stypes:sonic-ip4-prefix;
-						type stypes:sonic-ip6-prefix;
-					}
-				}
+        key "vlan-name port";
 
-				leaf scope {
-					type enumeration {
-						enum global;
-						enum local;
-					}
-				}
+        leaf vlan-name {
+          type leafref {
+            path "/vlan:sonic-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name";
+          }
+        }
 
-				leaf family {
+        leaf port {
+          /* key elements are mandatory by default */
+          type leafref {
+            path /port:sonic-port/port:port/port:port-list/port:port-name;
+          }
+        }
 
-					/* family leaf needed for backward compatibility
-					   Both ip4 and ip6 address are string in IETF RFC 6021,
-					   so must statement can check based on : or ., family
-					   should be IPv4 or IPv6 according.
-					 */
+        leaf tagging-mode {
+          type enumeration {
+            enum tagged;
+            enum untagged;
+            enum priority_tagged;
+          }
+        }
+      }
+      /* end of list VLAN_MEMBER_LIST */
+    }
+    /* end of container VLAN_MEMBER */
+    
+    container vlan-interface {
 
-					must "(contains(../ip-prefix, ':') and current()='IPv6') or
-						(contains(../ip-prefix, '.') and current()='IPv4')";
-					type stypes:ip-family;
-				}
-			}
-			/* end of VLAN_INTERFACE_LIST */
-		}
-		/* end of VLAN_INTERFACE container */
+      description "VLAN_INTERFACE part of config_db.json";
 
-		container vlan {
+      list vlan-interface-list {
 
-			description "VLAN part of config_db.json";
+        description "VLAN INTERFACE part of config_db.json with vrf";
 
-			list vlan-list {
+        key "vlan-name";
 
-				key "vlan-name";
+        leaf vlan-name {
+          type leafref {
+            path /vlan:sonic-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name;
+          }
+        }
 
-				ext:key-regex-configdb-to-yang "^(Vlan[a-zA-Z0-9_-]+)$";
+        leaf vrf_name {
+          type string {
+            pattern "Vrf[a-zA-Z0-9_-]+";
+            length 3..255;
+          }
+        }
+      }
+      /* end of VLAN_INTERFACE_LIST */
 
-				ext:key-regex-yang-to-configdb "<vlan-name>";
+      list vlan-interface-ipprefix-list {
 
-				leaf vlan-name {
-					type string {
-						pattern 'Vlan([0-9]{1,3}|[0-3][0-9]{4}|[4][0][0-8][0-9]|[4][0][9][0-4])';
-					}
-				}
+        key "vlan-name ip-prefix";
 
-				leaf vlanid {
-					type uint16 {
-						range 1..4094;
-					}
-				}
+        leaf vlan-name {
+          type leafref {
+            path "/vlan:sonic-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name";
+          }
+        }
 
-				leaf description {
-					type string {
-						length 1..255;
-					}
-				}
+        leaf ip-prefix {
+          type union {
+            type stypes:sonic-ip4-prefix;
+            type stypes:sonic-ip6-prefix;
+          }
+        }
 
-				leaf-list dhcp-servers {
-					type inet:ip-address;
-				}
+        leaf scope {
+          type enumeration {
+            enum global;
+            enum local;
+          }
+        }
 
-				leaf mtu {
-					type uint16 {
-						range 1..9216;
-					}
-				}
-
-				leaf admin-status {
-					type stypes:admin-status;
-				}
-
-				leaf-list members {
-					/* leaf-list members are unique by default */
-
-					type leafref {
-						path "/port:sonic-port/port:port/port:port-list/port:port-name";
-					}
-				}
-			}
-			/* end of VLAN_LIST */
-		}
-		/* end of container VLAN */
-
-		container vlan-member {
-
-			description "VLAN_MEMBER part of config_db.json";
-
-			list vlan-member-list {
-
-				key "vlan-name port";
-
-				ext:key-regex-configdb-to-yang "^(Vlan[a-zA-Z0-9-_]+)|(Ethernet[0-9]+)$";
-
-				ext:key-regex-yang-to-configdb "<vlan-name>|<port>";
-
-				leaf vlan-name {
-					type leafref {
-						path "/vlan:sonic-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name";
-					}
-				}
-
-				leaf port {
-					/* key elements are mandatory by default */
-					type leafref {
-						path /port:sonic-port/port:port/port:port-list/port:port-name;
-					}
-				}
-
-				leaf tagging-mode {
-					mandatory true;
-					type stypes:vlan-tagging-mode;
-				}
-			}
-            /* end of list VLAN_MEMBER_LIST */
-		}
-        /* end of container VLAN_MEMBER */
-	}
-    /* end of container sonic-vlan */
+        leaf family {
+          type stypes:ip-family;
+        }
+      }
+      /* end of VLAN_INTERFACE_LIST */
+    }
+    /* end of VLAN_INTERFACE container */
+  }
+  /* end of container sonic-vlan */
 }
 /* end of module sonic-vlan */

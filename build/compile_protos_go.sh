@@ -5,8 +5,8 @@ export GOPATH=`go env GOPATH`
 go_output="../api/protobuf/sonic"
 
 if [ -d  "$go_output" ];then
-path="$go_output""/*.pb.go"
-rm -f $path 
+  path="$go_output""/*.pb.go"
+  rm -f $path
 fi
 
 proto_imports="../api/protobuf/sonic:${GOPATH}/src:${GOPATH}/src/github.com/google/protobuf/src"

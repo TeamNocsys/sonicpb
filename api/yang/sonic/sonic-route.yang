@@ -1,0 +1,93 @@
+module sonic-route {
+
+  yang-version 1.1;
+
+  namespace "http://github.com/Azure/sonic-route";
+  prefix route;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  
+  import sonic-types {
+    prefix stypes;
+  }
+  
+  import sonic-vlan {
+    prefix vlan;
+  }
+  
+  import sonic-vrf {
+    prefix vrf;
+  }
+
+  revision 2021-01-11 {
+    description "First Revision";
+  }
+
+  container sonic-route {
+
+    container route {
+
+      list global-route-list {
+
+        key "ip-prefix";
+
+        leaf ip-prefix {
+          type union {
+            type stypes:sonic-ip4-prefix;
+            type stypes:sonic-ip6-prefix;
+          }
+        }
+        
+        leaf nexthop {
+          type inet:ip-address;
+        }
+
+        leaf ifname {
+          type union {
+            type leafref {
+              path /port:sonic-port/port:port/port:port-list/port:port-name;
+            }
+            type leafref {
+              path /vlan:sonic-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name;
+            }
+          }
+        }
+      }
+      
+      list route-list {
+        key "vrf-name ip-prefix";
+        
+        leaf vrf-name {
+          type leafref {
+            path /vrf:sonic-vrf/vrf:vrf/vrf:vrf-list/vrf:vrf-name;
+          }
+        }
+        
+        leaf ip-prefix {
+          type union {
+            type stypes:sonic-ip4-prefix;
+            type stypes:sonic-ip6-prefix;
+          }
+        }
+        
+        leaf nexthop {
+          type inet:ip-address;
+        }
+
+        leaf ifname {
+          type union {
+            type leafref {
+              path /port:sonic-port/port:port/port:port-list/port:port-name;
+            }
+            type leafref {
+              path /vlan:sonic-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name;
+            }
+          }
+        }
+      }
+      
+    }
+  }
+}
