@@ -17,6 +17,7 @@
 //  - ../api/yang/sonic/sonic-route.yang
 //  - ../api/yang/sonic/sonic-lldp.yang
 //  - ../api/yang/sonic/sonic-vlan.yang
+//  - ../api/yang/sonic/sonic-todo.yang
 //  - ../api/yang/sonic/sonic-portchannel.yang
 //  - ../api/yang/sonic/sonic-extension.yang
 //  - ../api/yang/sonic/sonic-mirror-session.yang
