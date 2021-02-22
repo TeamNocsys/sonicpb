@@ -1,0 +1,138 @@
+module nocsys-port{
+
+  yang-version 1.1;
+
+  namespace "http://github.com/nocsys/sonic-yang/nocsys-port";
+  prefix port;
+
+  import ietf-yang-types {
+    prefix yang;
+  }
+
+  import nocsys-types {
+    prefix stypes;
+    revision-date 2021-02-22;
+  }
+
+  revision 2021-02-22 {
+    description "First Revision";
+  }
+
+  container nocsys-port{
+    container port {
+      list port-list {
+        key "port-name";
+        
+        leaf port-name {
+          type string {
+            length 1..128;
+          }
+        }
+        
+        leaf index {
+          type uint32;
+        }
+        
+        leaf lanes {
+          type string {
+            length 1..128;
+          }
+        }
+        
+        leaf mtu {
+          type uint16 {
+            range 1..9216;
+          }
+        }
+        
+        leaf alias {
+          type string {
+            length 1..128;
+          }
+        }
+        
+        leaf admin-status {
+          type stypes:admin-status;
+        }
+        
+        leaf speed {
+          type uint32 {
+            range 1..100000;
+          }
+        }
+        
+        container state {
+          leaf oper-status {
+            type stypes:oper-status;
+          }
+          
+          leaf mac {
+            type yang:mac-address; 
+          }
+        }
+      }
+      
+      list port-statistics-list {
+        key "port-name";
+        
+        leaf port-name {
+          type leafref {
+            path /port:nocsys-port/port:port/port:port-list/port:port-name;
+          }
+        }
+        
+        leaf in-octets {
+          type yang:counter64;
+        }
+        
+        leaf in-unicast-pkts {
+          type yang:counter64;
+        }
+        
+        leaf in-multicast-pkts {
+          type yang:counter64;
+        }
+        
+        leaf in-broadcast-pkts {
+          type yang:counter64;
+        }
+        
+        leaf in-discards {
+          type yang:counter32;
+        }
+        
+        leaf in-errors {
+          type yang:counter32;
+        }
+        
+        leaf in-unknown-protos {
+          type yang:counter32;
+        }
+        
+        leaf out-octets {
+          type yang:counter64;
+        }
+        
+        leaf out-unicast-pkts {
+          type yang:counter64;
+        }
+        
+        leaf out-multicast-pkts {
+          type yang:counter64;
+        }
+        
+        leaf out-broadcast-pkts {
+          type yang:counter64;
+        }
+        
+        leaf out-discards {
+          type yang:counter32;
+        }
+        
+        leaf out-errors {
+          type yang:counter32;
+        }
+      }
+    }
+  }
+}

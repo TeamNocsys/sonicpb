@@ -1,0 +1,216 @@
+module nocsys-acl {
+
+  yang-version 1.1;
+
+  namespace "http://github.com/nocsys/sonic-yang/nocsys-acl";
+  prefix acl;
+
+  import ietf-yang-types {
+    prefix yang;
+  }
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  import nocsys-types {
+    prefix stypes;
+    revision-date 2021-02-22;
+  }
+
+  import nocsys-port {
+    prefix port;
+    revision-date 2021-02-22;
+  }
+
+  import nocsys-portchannel {
+    prefix lag;
+    revision-date 2021-02-22;
+  }
+
+  revision 2021-02-22 {
+    description "First Revision";
+  }
+
+  container nocsys-acl {
+    container acl-rule {
+      list acl-rule-list {
+        key "table-name rule-name";
+        
+        leaf table-name {
+          type leafref {
+            path "/acl:nocsys-acl/acl:acl-table/acl:acl-table-list/acl:table-name";
+          }
+        }
+        
+        leaf rule-name {
+          type string {
+            length 1..255;
+          }
+        }
+        
+        leaf priority {
+          type uint32 {
+            range 0..999999;
+          }
+        }
+        
+        leaf packet-action {
+          type stypes:packet-action;
+        }
+        
+        leaf redirect-action {
+          type string {
+            length 1..255;
+          }
+        }
+        
+        leaf mirror-action {
+          type string {
+            length 1..255;
+          }
+        }
+        
+        leaf mirror-ingress-action {
+          type string {
+            length 1..255;
+          }
+        }
+        
+        leaf mirror-egress-action {
+          type string {
+            length 1..255;
+          }
+        }
+        
+        leaf ether-type {
+          type enumeration {
+            enum LLDP;
+            enum VLAN;
+            enum ROCE;
+            enum ARP;
+            enum IPV4;
+            enum IPV6;
+            enum MPLS;
+          }
+        }
+        
+        leaf ip-type {
+          type stypes:ip-type;
+        }
+        
+        leaf ip-protocol {
+          type enumeration {
+            enum TCP;
+            enum ICMP;
+            enum UDP;
+            enum IGMP;
+            enum PIM;
+            enum RSVP;
+            enum GRE;
+            enum AUTH;
+            enum L2TP;
+          }
+        }
+        
+        leaf src-ip {
+          type inet:ipv4-prefix;
+        }
+        
+        leaf dst-ip {
+          type inet:ipv4-prefix;
+        }
+        
+        leaf src-ipv6 {
+          type inet:ipv6-prefix;
+        }
+        
+        leaf dst-ipv6 {
+          type inet:ipv6-prefix;
+        }
+        
+        leaf l4-src-port {
+          type uint32;
+        }
+        
+        leaf l4-dst-port {
+          type uint32;
+        }
+        
+        leaf l4-src-port-range {
+          type string;
+        }
+        
+        leaf l4-dst-port-range {
+          type string;
+        }
+        
+        leaf tcp-flags {
+          type string;
+        }
+        
+        leaf dscp {
+          type uint8;
+        }
+        
+        leaf-list in-ports {
+          type leafref {
+            path /port:nocsys-port/port:port/port:port-list/port:port-name;
+          }
+        }
+        
+        leaf-list out-ports {
+          type leafref {
+            path /port:nocsys-port/port:port/port:port-list/port:port-name;
+          }
+        }
+      }
+    }
+    
+    container acl-table {
+      list acl-table-list {
+        key "table-name";
+        
+        leaf table-name {
+          type string;
+        }
+        
+        leaf policy-desc {
+          type string {
+            length 1..255;
+          }
+        }
+        
+        leaf type {
+          type enumeration {
+            enum L2;
+            enum L3;
+            enum L3V6;
+            enum MIRROR;
+            enum MIRRORV6;
+            enum MIRROR_DSCP;
+            enum CTRLPLANE;
+          }
+        }
+        
+        leaf stage {
+          type enumeration {
+            enum INGRESS;
+            enum EGRESS;
+          }
+        }
+        
+        leaf-list ports {
+          type union {
+            type leafref {
+              path /port:nocsys-port/port:port/port:port-list/port:port-name;
+            }
+            type leafref {
+              path /lag:nocsys-portchannel/lag:portchannel/lag:portchannel-list/lag:portchannel-name;
+            }
+          }
+        }
+      }
+    }
+  }
+}

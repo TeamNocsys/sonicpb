@@ -1,0 +1,146 @@
+module nocsys-vlan {
+
+  yang-version 1.1;
+
+  namespace "http://github.com/nocsys/sonic-yang/nocsys-vlan";
+  prefix vlan;
+
+  import ietf-yang-types {
+    prefix yang;
+  }
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  import nocsys-types {
+    prefix stypes;
+    revision-date 2021-02-22;
+  }
+
+  import nocsys-port {
+    prefix port;
+    revision-date 2021-02-22;
+  }
+
+  revision 2021-02-22 {
+    description "First Revision";
+  }
+
+  container nocsys-vlan {
+    container vlan {
+      list vlan-list {
+        key "vlan-name";
+        
+        leaf vlan-name {
+          type string {
+            pattern 'Vlan([0-9]{1,3}|[0-3][0-9]{4}|[4][0][0-8][0-9]|[4][0][9][0-4])';
+          }
+        }
+        
+        leaf vlanid {
+          type uint16 {
+            range 1..4094;
+          }
+        }
+        
+        leaf description {
+          type string {
+            length 1..255;
+          }
+        }
+        
+        leaf-list dhcp-servers {
+          type inet:ip-address;
+        }
+        
+        leaf mtu {
+          type uint16 {
+            range 1..9216;
+          }
+        }
+        
+        leaf admin-status {
+          type stypes:admin-status;
+        }
+        
+        leaf-list members {
+          type leafref {
+            path "/port:nocsys-port/port:port/port:port-list/port:port-name";
+          }
+        }
+      }
+    }
+
+    container vlan-member {
+      list vlan-member-list {
+        key "vlan-name port";
+        
+        leaf vlan-name {
+          type leafref {
+            path "/vlan:nocsys-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name";
+          }
+        }
+        
+        leaf port {
+          type leafref {
+            path /port:nocsys-port/port:port/port:port-list/port:port-name;
+          }
+        }
+        
+        leaf tagging-mode {
+          type enumeration {
+            enum tagged;
+            enum untagged;
+            enum priority_tagged;
+          }
+        }
+      }
+    }
+    
+    container vlan-interface {
+      list vlan-interface-list {
+        key "vlan-name";
+        
+        leaf vlan-name {
+          type leafref {
+            path /vlan:nocsys-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name;
+          }
+        }
+        
+        leaf vrf_name {
+          type leafref {
+            path /vrf:nocsys-vrf/vrf:vrf/vrf:vrf-list/vrf:vrf-name;
+          }
+        }
+      }
+      
+      list vlan-interface-ipprefix-list {
+        key "vlan-name ip-prefix";
+        leaf vlan-name {
+          type leafref {
+            path "/vlan:nocsys-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name";
+          }
+        }
+        
+        leaf ip-prefix {
+          type union {
+            type stypes:nocsys-ip4-prefix;
+            type stypes:nocsys-ip6-prefix;
+          }
+        }
+        
+        leaf scope {
+          type enumeration {
+            enum global;
+            enum local;
+          }
+        }
+        
+        leaf family {
+          type stypes:ip-family;
+        }
+      }
+    }
+  }
+}

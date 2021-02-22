@@ -1,0 +1,124 @@
+module nocsys-portchannel {
+
+  yang-version 1.1;
+
+  namespace "http://github.com/Azure/sonic-portchannel";
+  prefix lag;
+
+  import ietf-yang-types {
+    prefix yang;
+  }
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  import nocsys-types {
+    prefix stypes;
+    revision-date 2021-02-22;
+  }
+
+  import nocsys-port {
+    prefix port;
+    revision-date 2021-02-22;
+  }
+
+  revision 2021-02-22 {
+    description "First Revision";
+  }
+
+  container nocsys-portchannel {
+    container portchannel {
+      list portchannel-list {
+        key "portchannel-name";
+        
+        leaf portchannel-name {
+          type string {
+            length 1..128;
+            pattern 'PortChannel[0-9]{1,4}';
+          }
+        }
+        
+        leaf min-links {
+          type uint8 {
+            range 1..128;
+          }
+        }
+        
+        leaf mtu {
+          type uint16 {
+            range 1..9216;
+          }
+        }
+        
+        leaf admin-status {
+          type stypes:admin-status;
+        }
+      }
+    }
+    
+    container portchannel-member {
+      list portchannel-member-list {
+        key "portchannel-name port";
+        
+        leaf portchannel-name {
+          type leafref {
+            path "/lag:nocsys-portchannel/lag:portchannel/lag:portchannel-list/lag:portchannel-name";
+          }
+        }
+        
+        leaf port {
+          type leafref {
+            path /port:nocsys-port/port:port/port:port-list/port:port-name;
+          }
+        }
+      }
+    }
+
+    container portchannel-interface {
+      list portchannel-interface-list {
+        key "portchannel-name";
+        
+        leaf portchannel-name {
+          type leafref {
+            path "/lag:nocsys-portchannel/lag:portchannel/lag:portchannel-list/lag:portchannel-name";
+          }
+        }
+        
+        leaf vrf-name {
+          type leafref {
+            path /vrf:nocsys-vrf/vrf:vrf/vrf:vrf-list/vrf:vrf-name;
+          }
+        }
+      }
+
+      list portchannel-interface-ipprefix-list {
+        key "portchannel-name ip-prefix";
+        
+        leaf portchannel-name {
+          type leafref {
+            path "/lag:nocsys-portchannel/lag:portchannel/lag:portchannel-list/lag:portchannel-name";
+          }
+        }
+        
+        leaf ip-prefix {
+          type union {
+            type stypes:nocsys-ip4-prefix;
+            type stypes:nocsys-ip6-prefix;
+          }
+        }
+        
+        leaf scope {
+          type enumeration {
+            enum global;
+            enum local;
+          }
+        }
+        
+        leaf family {
+          type stypes:ip-family;
+        }
+      }
+    }
+  }
+}

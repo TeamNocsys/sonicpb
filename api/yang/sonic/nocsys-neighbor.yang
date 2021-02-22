@@ -1,0 +1,68 @@
+module nocsys-neighor {
+
+  yang-version 1.1;
+
+  namespace "http://github.com/nocsys/sonic-yang/nocsys-neighor";
+  prefix neighor;
+  
+  import ietf-yang-types {
+    prefix yang;
+  }
+  
+  import nocsys-port {
+    prefix port;
+    revision-date 2021-02-22;
+  }
+  
+  import nocsys-portchannel {
+    prefix lag;
+    revision-date 2021-02-22;
+  }
+  
+  import nocsys-vlan {
+    prefix vlan;
+    revision-date 2021-02-22;
+  }
+
+  import nocsys-types {
+    prefix stypes;
+    revision-date 2021-02-22;
+  }
+
+  revision 2021-02-22 {
+    description "First Revision";
+  }
+
+  container nocsys-neighor {
+    container neighor {
+      list neighor-list {
+        key "name ip-prefix";
+        
+        leaf name {
+          type union {
+            type leafref {
+              path /port:nocsys-port/port:port/port:port-list/port:port-name;
+            }
+            type leafref {
+              path /lag:nocsys-portchannel/lag:portchannel/lag:portchannel-list/lag:portchannel-name;
+            }
+            type leafref {
+              path /vlan:nocsys-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name;
+            }
+          }
+        }
+        
+        leaf ip-prefix {
+          type union {
+            type stypes:nocsys-ip4-prefix;
+            type stypes:nocsys-ip6-prefix;
+          }
+        }
+        
+        leaf neigh {
+          type yang:mac-address;
+        }
+      }
+    }
+  }
+}

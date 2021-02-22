@@ -1,0 +1,64 @@
+module nocsys-loopback-interface {
+
+  yang-version 1.1;
+
+  namespace "http://github.com/nocsys/sonic-yang/nocsys-loopback-interface";
+  prefix lointf;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  import nocsys-types {
+    prefix stypes;
+    revision-date 2021-02-22;
+  }
+
+  revision 2021-02-22 {
+    description "First Revision";
+  }
+    
+  container nocsys-loopback-interface {
+    container loopback-interface {
+      list loopback-interface-list {
+        key "loopback-interface-name";
+        
+        leaf loopback-interface-name{
+          type string;
+        }
+        
+        leaf vrf-name {
+          type leafref {
+            path /vrf:nocsys-vrf/vrf:vrf/vrf:vrf-list/vrf:vrf-name;
+          }
+        }
+      }
+      
+      list loopback-interface-ipprefix-list {
+        key "loopback-interface-name ip-prefix";
+        
+        leaf loopback-interface-name{
+          type string;
+        }
+        
+        leaf ip-prefix {
+          type union {
+            type stypes:nocsys-ip4-prefix;
+            type stypes:nocsys-ip6-prefix;
+          }
+        }
+        
+        leaf scope {
+          type enumeration {
+            enum global;
+            enum local;
+          }
+        }
+        
+        leaf family {
+          type stypes:ip-family;
+        }
+      }
+    }
+  }
+}

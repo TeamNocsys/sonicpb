@@ -1,0 +1,84 @@
+module nocsys-interface {
+
+  yang-version 1.1;
+
+  namespace "http://github.com/nocsys/sonic-yang/nocsys-interface";
+  prefix intf;
+
+  import ietf-yang-types {
+    prefix yang;
+  }
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+
+  import nocsys-types {
+    prefix stypes;
+    revision-date 2021-02-22;
+  }
+
+  import nocsys-port {
+    prefix port;
+    revision-date 2021-02-22;
+  }
+  
+  import nocsys-vrf {
+    prefix vrf;
+    revision-date 2021-02-22;
+  }
+
+  description "INTERFACE yang Module for SONiC OS";
+
+  revision 2021-02-22 {
+    description "First Revision";
+  }
+
+  container nocsys-interface {
+    container interface {
+      list interface-list {
+        key "port-name";
+        
+        leaf port-name {
+          type leafref {
+            path /port:nocsys-port/port:port/port:port-list/port:port-name;
+          }
+        }
+        
+        leaf vrf-name {
+          type leafref {
+            path /vrf:nocsys-vrf/vrf:vrf/vrf:vrf-list/vrf:vrf-name;
+          }
+        }
+      }
+      
+      list interface-ipprefix-list {
+        key "port-name ip-prefix";
+
+        leaf port-name {
+          type leafref {
+            path /port:nocsys-port/port:port/port:port-list/port:port-name;
+          }
+        }
+        
+        leaf ip-prefix {
+          type union {
+            type stypes:nocsys-ip4-prefix;
+            type stypes:nocsys-ip6-prefix;
+          }
+        }
+        
+        leaf scope {
+          type enumeration {
+            enum global;
+            enum local;
+          }
+        }
+        
+        leaf family {
+          type stypes:ip-family;
+        }
+      }
+    }
+  }
+}
