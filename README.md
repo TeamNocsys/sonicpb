@@ -15,8 +15,13 @@ $ go env -w GOPROXY=https://goproxy.io,direct
 
 ```shell
 ### 记得导出环境变量 export PATH=$PATH:$HOME/go/bin
-### 使用改版的ygot，不然java编译会报错
-$ GO111MODULE=off go get -u github.com/TeamNocsys/ygot/proto_generator
+### 使用改版的ygot，不然java编译会报错，不能直接使用go get的方式，否则生成的proto_generator还是官方的
+$ GOPATH=`go env GOPATH`
+$ mkdir -p $GOPATH/src/github.com/TeamNocsys
+$ cd $GOPATH/src/github.com/TeamNocsys
+$ git clone https://github.com/TeamNocsys/ygot.git
+$ cd ygot/proto_generator
+$ go install .
 ```
 
 > 配置编译环境
