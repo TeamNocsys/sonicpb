@@ -14,6 +14,11 @@ module nocsys-loopback-interface {
     revision-date 2021-02-22;
   }
 
+  import nocsys-vrf {
+    prefix vrf;
+	revision-date 2021-02-22;
+  }
+
   revision 2021-02-22 {
     description "First Revision";
   }
