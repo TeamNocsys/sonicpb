@@ -1,6 +1,9 @@
 # sonicpb
 
+> go最低版本1.16.3
+
 ## 编译前准备
+
 > 配置代理
 
 ```shell
@@ -11,9 +14,9 @@ $ go env -w GOPROXY=https://goproxy.io,direct
 > 下载YANG编译工具
 
 ```shell
-$ go env -w GO111MODULE=off
-$ go get -u github.com/openconfig/ygot@v0.9.0
-$ go env -w GO111MODULE=on
+### 记得导出环境变量 export PATH=$PATH:$HOME/go/bin
+### 使用改版的ygot，不然java编译会报错
+$ GO111MODULE=off go get -u github.com/TeamNocsys/ygot/proto_generator
 ```
 
 > 配置编译环境
