@@ -10,6 +10,11 @@ module nocsys-vxlan {
     revision-date 2021-02-22;
   }
 
+  import nocsys-vlan {
+    prefix vlan;
+    revision-date 2021-02-22;
+  }
+
   revision 2021-02-22 {
     description "First Revision";
   }
@@ -18,67 +23,67 @@ module nocsys-vxlan {
     container vxlan {
       list vxlan-tunnel-list {
         key "tunnel-name";
-        
+
         leaf tunnel-name {
           type string {
             length 1..128;
           }
         }
-        
+
         leaf src-ip {
           type stypes:nocsys-ip4-prefix;
         }
-        
+
         leaf dst-ip {
           type stypes:nocsys-ip4-prefix;
         }
       }
-      
+
       list vxlan-tunnel-map-list {
         key "tunnel-name tunnel-map";
-        
+
         leaf tunnel-name {
           type leafref {
             path /vxlan:nocsys-vxlan/vxlan:vxlan/vxlan:vxlan-tunnel-list/vxlan:tunnel-name;
           }
         }
-        
+
         leaf tunnel-map {
           type string {
             length 1..128;
           }
         }
-        
+
         leaf vni {
           type uint32;
         }
-        
+
         leaf vlan {
           type leafref {
             path /vlan:nocsys-vlan/vlan:vlan/vlan:vlan-list/vlan:vlanid;
           }
         }
       }
-      
+
       list vnet-list {
         key "vnet-name";
-        
+
         leaf vnet-name {
           type string {
             length 1..128;
           }
         }
-        
+
         leaf vxlan-tunnel {
           type leafref {
             path /vxlan:nocsys-vxlan/vxlan:vxlan/vxlan:vxlan-tunnel-list/vxlan:tunnel-name;
           }
         }
-        
+
         leaf vni {
           type uint32;
         }
-        
+
         leaf-list peer-list {
           type leafref {
             path /vxlan:nocsys-vxlan/vxlan:vxlan/vxlan:vnet-list/vxlan:vnet-name;
