@@ -21,7 +21,7 @@ if [ -d "$dest" ];then
 fi
 find $output -name "*.proto" | xargs -i mv {} ../api/protobuf/sonic
 
-cp ${GOPATH}/src/github.com/openconfig/ygot/proto/yext/yext.proto ../api/protobuf/sonic
-cp ${GOPATH}/src/github.com/openconfig/ygot/proto/ywrapper/ywrapper.proto ../api/protobuf/sonic
+cp ${GOPATH}/src/github.com/TeamNocsys/ygot/proto/yext/yext.proto ../api/protobuf/sonic
+cp ${GOPATH}/src/github.com/TeamNocsys/ygot/proto/ywrapper/ywrapper.proto ../api/protobuf/sonic
 
 rm -rf $output
