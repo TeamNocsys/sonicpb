@@ -7,6 +7,7 @@
 //  - ../api/yang/sonic/nocsys-todo.yang
 //  - ../api/yang/sonic/nocsys-types.yang
 //  - ../api/yang/sonic/nocsys-route.yang
+//  - ../api/yang/sonic/nocsys-system.yang
 //  - ../api/yang/sonic/nocsys-extension.yang
 //  - ../api/yang/sonic/nocsys-loopback-interface.yang
 //  - ../api/yang/sonic/nocsys-portchannel.yang
@@ -15,6 +16,8 @@
 //  - ../api/yang/sonic/nocsys-platform-types.yang
 //  - ../api/yang/sonic/nocsys-mirror-session.yang
 //  - ../api/yang/sonic/nocsys-vrf.yang
+//  - ../api/yang/sonic/third_party/openconfig/openconfig-extensions.yang
+//  - ../api/yang/sonic/third_party/openconfig/openconfig-types.yang
 //  - ../api/yang/sonic/third_party/ietf/ietf-yang-types.yang
 //  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
 //  - ../api/yang/sonic/third_party/ietf/iana-if-type.yang

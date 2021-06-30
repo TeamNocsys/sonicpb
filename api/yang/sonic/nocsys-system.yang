@@ -1,0 +1,178 @@
+module nocsys-system{
+
+  yang-version 1.1;
+
+  namespace "http://github.com/nocsys/sonic-yang/nocsys-system";
+
+  prefix nocsys-system;
+
+  import openconfig-types { prefix oc-types; }
+
+  revision 2021-06-22 {
+    description "First Revision";
+  }
+
+  grouping system-cpu-state {
+    description
+      "Operational state data for the system CPU(s)";
+
+    leaf index {
+      type union {
+        type enumeration {
+          enum ALL {
+            description
+              "Index value indicating all CPUs in the system";
+          }
+        }
+        type uint32;
+      }
+      description
+        "The CPU index for each processor core on the system.  On a
+        single-core system, the index should be zero.  The ALL
+        index signifies an aggregation of the CPU utilization
+        statistics over all cores in the system.";
+    }
+
+    container total {
+      description
+        "Total CPU utilization.";
+
+      uses oc-types:avg-min-max-instant-stats-pct;
+    }
+
+    container user {
+      description
+        "Percentage of CPU time spent running in user space.";
+
+      uses oc-types:avg-min-max-instant-stats-pct;
+    }
+
+    container kernel {
+      description
+        "Percentage of CPU time spent running in kernel space.";
+
+      uses oc-types:avg-min-max-instant-stats-pct;
+    }
+
+    container nice {
+      description
+        "Percentage of CPU time spent running low-priority (niced)
+        user processes.";
+
+      uses oc-types:avg-min-max-instant-stats-pct;
+    }
+
+    container idle {
+      description
+        "Percentage of CPU time spent idle.";
+
+      uses oc-types:avg-min-max-instant-stats-pct;
+    }
+
+    container wait {
+      description
+        "Percentage of CPU time spent waiting for I/O.";
+
+      uses oc-types:avg-min-max-instant-stats-pct;
+    }
+
+    container hardware-interrupt {
+      description
+        "Percentage of CPU time spent servicing hardware interrupts.";
+
+      uses oc-types:avg-min-max-instant-stats-pct;
+    }
+
+    container software-interrupt {
+      description
+        "Percentage of CPU time spent servicing software interrupts";
+
+      uses oc-types:avg-min-max-instant-stats-pct;
+    }
+  }
+
+  grouping system-cpu-top {
+    description
+      "Top-level grouping for system CPU data";
+
+    container cpus {
+      config false;
+      description
+        "Enclosing container for the list of CPU cores on the
+        system";
+
+      list cpu {
+        key "index";
+        description
+          "List of CPU cores on the system (including logical CPUs
+          on hyperthreaded systems), keyed by either a numerical
+          index, or the ALL value for an entry representing the
+          aggregation across all CPUs.";
+
+        leaf index {
+          type leafref {
+            path "../state/index";
+          }
+          description
+            "Reference to list key";
+        }
+
+        container state {
+
+          description
+            "Operational state data for the system CPU(s)";
+
+          uses system-cpu-state;
+        }
+      }
+    }
+  }
+
+  grouping system-memory-top {
+    container memory {
+      config false;
+      description "top memory status";
+      leaf used {
+        type uint64;
+        description "The used memory in KB";
+      }
+      leaf free {
+        type uint64;
+        description "The free memory in KB";
+      }
+      leaf buffered {
+        type uint64;
+        description "The buffered memory in KB";
+      }
+      leaf cached {
+        type uint64;
+        description "The cached memory in KB";
+      }
+      leaf slab_unrecl {
+        type uint64;
+        description "The slab unreclaim memory in KB";
+      }
+    }
+  }
+
+  grouping system-disk {
+    container disk {
+      config false;
+      description "current disk status";
+      leaf used {
+        type uint64;
+        description "The used disk space in KB";
+      }
+      leaf free {
+        type uint64;
+        description "The free disk space in KB";
+      }
+	}
+  }
+
+  container nocsys-system-top{
+    uses system-cpu-top;
+    uses system-memory-top;
+	uses system-disk;
+  }
+}
