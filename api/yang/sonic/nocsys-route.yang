@@ -1,4 +1,4 @@
-module nocsys-route {
+module accton-route {
 
   yang-version 1.1;
 
@@ -9,22 +9,22 @@ module nocsys-route {
     prefix inet;
   }
 
-  import nocsys-port {
+  import accton-port {
     prefix port;
 	revision-date 2021-02-22;
   }
 
-  import nocsys-types {
+  import accton-types {
     prefix stypes;
     revision-date 2021-02-22;
   }
 
-  import nocsys-vlan {
+  import accton-vlan {
     prefix vlan;
     revision-date 2021-02-22;
   }
 
-  import nocsys-vrf {
+  import accton-vrf {
     prefix vrf;
     revision-date 2021-02-22;
   }
@@ -88,21 +88,21 @@ module nocsys-route {
              separated by a % sign.";
     }
 
-  container nocsys-route {
+  container accton-route {
     container route {
       list route-list {
         key "vrf-name ip-prefix";
 
         leaf vrf-name {
           type leafref {
-            path /vrf:nocsys-vrf/vrf:vrf/vrf:vrf-list/vrf:vrf-name;
+            path /vrf:accton-vrf/vrf:vrf/vrf:vrf-list/vrf:vrf-name;
           }
         }
 
         leaf ip-prefix {
           type union {
-            type stypes:nocsys-ip4-prefix;
-            type stypes:nocsys-ip6-prefix;
+            type stypes:accton-ip4-prefix;
+            type stypes:accton-ip6-prefix;
           }
         }
 

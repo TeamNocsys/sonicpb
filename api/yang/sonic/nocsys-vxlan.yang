@@ -1,16 +1,16 @@
-module nocsys-vxlan {
+module accton-vxlan {
 
   yang-version 1.1;
 
-  namespace "http://github.com/nocsys/sonic-yang/nocsys-vxlan";
+  namespace "http://github.com/accton/sonic-yang/accton-vxlan";
   prefix vxlan;
 
-  import nocsys-types {
+  import accton-types {
     prefix stypes;
     revision-date 2021-02-22;
   }
 
-  import nocsys-vlan {
+  import accton-vlan {
     prefix vlan;
     revision-date 2021-02-22;
   }
@@ -19,7 +19,7 @@ module nocsys-vxlan {
     description "First Revision";
   }
 
-  container nocsys-vxlan {
+  container accton-vxlan {
     container vxlan {
       list vxlan-tunnel-list {
         key "tunnel-name";
@@ -31,11 +31,11 @@ module nocsys-vxlan {
         }
 
         leaf src-ip {
-          type stypes:nocsys-ip4-prefix;
+          type stypes:accton-ip4-prefix;
         }
 
         leaf dst-ip {
-          type stypes:nocsys-ip4-prefix;
+          type stypes:accton-ip4-prefix;
         }
       }
 
@@ -44,7 +44,7 @@ module nocsys-vxlan {
 
         leaf tunnel-name {
           type leafref {
-            path /vxlan:nocsys-vxlan/vxlan:vxlan/vxlan:vxlan-tunnel-list/vxlan:tunnel-name;
+            path /vxlan:accton-vxlan/vxlan:vxlan/vxlan:vxlan-tunnel-list/vxlan:tunnel-name;
           }
         }
 
@@ -60,7 +60,7 @@ module nocsys-vxlan {
 
         leaf vlan {
           type leafref {
-            path /vlan:nocsys-vlan/vlan:vlan/vlan:vlan-list/vlan:vlanid;
+            path /vlan:accton-vlan/vlan:vlan/vlan:vlan-list/vlan:vlanid;
           }
         }
       }
@@ -76,7 +76,7 @@ module nocsys-vxlan {
 
         leaf vxlan-tunnel {
           type leafref {
-            path /vxlan:nocsys-vxlan/vxlan:vxlan/vxlan:vxlan-tunnel-list/vxlan:tunnel-name;
+            path /vxlan:accton-vxlan/vxlan:vxlan/vxlan:vxlan-tunnel-list/vxlan:tunnel-name;
           }
         }
 
@@ -86,7 +86,7 @@ module nocsys-vxlan {
 
         leaf-list peer-list {
           type leafref {
-            path /vxlan:nocsys-vxlan/vxlan:vxlan/vxlan:vnet-list/vxlan:vnet-name;
+            path /vxlan:accton-vxlan/vxlan:vxlan/vxlan:vnet-list/vxlan:vnet-name;
           }
         }
       }

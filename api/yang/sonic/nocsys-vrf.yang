@@ -1,15 +1,15 @@
-module nocsys-vrf {
+module accton-vrf {
 
   yang-version 1.1;
 
-  namespace "http://github.com/nocsys/sonic-yang/nocsys-vrf";
+  namespace "http://github.com/accton/sonic-yang/accton-vrf";
   prefix vrf;
 
   revision 2021-02-22 {
     description "First Revision";
   }
 
-  container nocsys-vrf {
+  container accton-vrf {
     container vrf {
       list vrf-list {
         key "vrf-name";

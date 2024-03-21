@@ -1,15 +1,15 @@
-module nocsys-port{
+module accton-port{
 
   yang-version 1.1;
 
-  namespace "http://github.com/nocsys/sonic-yang/nocsys-port";
+  namespace "http://github.com/accton/sonic-yang/accton-port";
   prefix port;
 
   import ietf-yang-types {
     prefix yang;
   }
 
-  import nocsys-types {
+  import accton-types {
     prefix stypes;
     revision-date 2021-02-22;
   }
@@ -18,7 +18,7 @@ module nocsys-port{
     description "First Revision";
   }
 
-  container nocsys-port{
+  container accton-port{
     container port {
       list port-list {
         key "port-name";
@@ -77,7 +77,7 @@ module nocsys-port{
         
         leaf port-name {
           type leafref {
-            path /port:nocsys-port/port:port/port:port-list/port:port-name;
+            path /port:accton-port/port:port/port:port-list/port:port-name;
           }
         }
         

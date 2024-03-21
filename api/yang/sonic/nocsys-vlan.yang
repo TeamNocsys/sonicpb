@@ -1,8 +1,8 @@
-module nocsys-vlan {
+module accton-vlan {
 
   yang-version 1.1;
 
-  namespace "http://github.com/nocsys/sonic-yang/nocsys-vlan";
+  namespace "http://github.com/accton/sonic-yang/accton-vlan";
   prefix vlan;
 
   import ietf-yang-types {
@@ -13,17 +13,17 @@ module nocsys-vlan {
     prefix inet;
   }
 
-  import nocsys-types {
+  import accton-types {
     prefix stypes;
     revision-date 2021-02-22;
   }
 
-  import nocsys-port {
+  import accton-port {
     prefix port;
     revision-date 2021-02-22;
   }
 
-  import nocsys-vrf {
+  import accton-vrf {
     prefix vrf;
 	revision-date 2021-02-22;
   }
@@ -32,7 +32,7 @@ module nocsys-vlan {
     description "First Revision";
   }
 
-  container nocsys-vlan {
+  container accton-vlan {
     container vlan {
       list vlan-list {
         key "vlan-name";
@@ -71,7 +71,7 @@ module nocsys-vlan {
 
         leaf-list members {
           type leafref {
-            path "/port:nocsys-port/port:port/port:port-list/port:port-name";
+            path "/port:accton-port/port:port/port:port-list/port:port-name";
           }
         }
       }
@@ -83,13 +83,13 @@ module nocsys-vlan {
 
         leaf vlan-name {
           type leafref {
-            path "/vlan:nocsys-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name";
+            path "/vlan:accton-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name";
           }
         }
 
         leaf port {
           type leafref {
-            path /port:nocsys-port/port:port/port:port-list/port:port-name;
+            path /port:accton-port/port:port/port:port-list/port:port-name;
           }
         }
 
@@ -109,13 +109,13 @@ module nocsys-vlan {
 
         leaf vlan-name {
           type leafref {
-            path /vlan:nocsys-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name;
+            path /vlan:accton-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name;
           }
         }
 
         leaf vrf_name {
           type leafref {
-            path /vrf:nocsys-vrf/vrf:vrf/vrf:vrf-list/vrf:vrf-name;
+            path /vrf:accton-vrf/vrf:vrf/vrf:vrf-list/vrf:vrf-name;
           }
         }
       }
@@ -124,14 +124,14 @@ module nocsys-vlan {
         key "vlan-name ip-prefix";
         leaf vlan-name {
           type leafref {
-            path "/vlan:nocsys-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name";
+            path "/vlan:accton-vlan/vlan:vlan/vlan:vlan-list/vlan:vlan-name";
           }
         }
 
         leaf ip-prefix {
           type union {
-            type stypes:nocsys-ip4-prefix;
-            type stypes:nocsys-ip6-prefix;
+            type stypes:accton-ip4-prefix;
+            type stypes:accton-ip6-prefix;
           }
         }
 

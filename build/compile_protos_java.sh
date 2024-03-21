@@ -1,7 +1,7 @@
 #!/bin/sh
 
 export GOPATH=`go env GOPATH`
-proto_imports="../api/protobuf/sonic:${GOPATH}/src:${GOPATH}/src/github.com/google/protobuf/src"
+proto_imports="../api/protobuf/sonic:${GOPATH}/src:${GOPATH}/src/github.com/gogo/protobuf"
 java_output="jar/src/main/java"
 
 if [ ! -d "$java_output" ];then

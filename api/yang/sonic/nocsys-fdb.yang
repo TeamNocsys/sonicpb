@@ -1,11 +1,11 @@
-module nocsys-fdb {
+module accton-fdb {
 
   yang-version 1.1;
 
-  namespace "http://github.com/nocsys/sonic-yang/nocsys-fdb";
+  namespace "http://github.com/accton/sonic-yang/accton-fdb";
   prefix fdb;
   
-  import nocsys-port {
+  import accton-port {
     prefix port;
   }
 
@@ -13,7 +13,7 @@ module nocsys-fdb {
     description "First Revision";
   }
 
-  container nocsys-fdb {
+  container accton-fdb {
     container fdb {
       list fdb-list {
         key "fdb-name";
@@ -27,7 +27,7 @@ module nocsys-fdb {
         
         leaf port {
           type leafref {
-            path /port:nocsys-port/port:port/port:port-list/port:port-name;
+            path /port:accton-port/port:port/port:port-list/port:port-name;
           }
         }
         

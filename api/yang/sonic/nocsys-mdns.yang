@@ -1,15 +1,15 @@
-module nocsys-mdns {
+module accton-mdns {
 
   yang-version 1.1;
 
-  namespace "http://github.com/nocsys/sonic-yang/nocsys-mdns";
+  namespace "http://github.com/accton/sonic-yang/accton-mdns";
   prefix mdns;
   
   import ietf-yang-types {
     prefix yang;
   }
   
-  import nocsys-types {
+  import accton-types {
     prefix stypes;
     revision-date 2021-02-22;
   }
@@ -18,15 +18,15 @@ module nocsys-mdns {
     description "First Revision";
   }
 
-  container nocsys-mdns {
+  container accton-mdns {
     container mdns {
       list mdns-list {
         key "ip-prefix";
         
         leaf ip-prefix {
           type union {
-            type stypes:nocsys-ip4-prefix;
-            type stypes:nocsys-ip6-prefix;
+            type stypes:accton-ip4-prefix;
+            type stypes:accton-ip6-prefix;
           }
         }
         

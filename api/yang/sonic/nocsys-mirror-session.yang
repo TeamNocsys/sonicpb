@@ -1,11 +1,11 @@
-module nocsys-mirror-session {
+module accton-mirror-session {
 
   yang-version 1.1;
 
-  namespace "http://github.com/nocsys/sonic-yang/nocsys-mirror-session";
+  namespace "http://github.com/accton/sonic-yang/accton-mirror-session";
   prefix mirror;
 
-  import nocsys-port {
+  import accton-port {
     prefix port;
     revision-date 2021-02-22;
   }
@@ -20,7 +20,7 @@ module nocsys-mirror-session {
     description "First Revision";
   }
 
-  container nocsys-mirror-session {
+  container accton-mirror-session {
     container mirror-session {
       list mirror-session-list {
         key "name";
@@ -68,13 +68,13 @@ module nocsys-mirror-session {
         
         leaf dst-port {
           type leafref {
-              path /port:nocsys-port/port:port/port:port-list/port:port-name;
+              path /port:accton-port/port:port/port:port-list/port:port-name;
             }
         }
         
         leaf src-port {
           type leafref {
-              path /port:nocsys-port/port:port/port:port-list/port:port-name;
+              path /port:accton-port/port:port/port:port-list/port:port-name;
             }
         }
         

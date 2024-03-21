@@ -9,5 +9,5 @@ if [ -d  "$go_output" ];then
   rm -f $path
 fi
 
-proto_imports="../api/protobuf/sonic:${GOPATH}/src:${GOPATH}/src/github.com/google/protobuf/src"
+proto_imports="../api/protobuf/sonic:${GOPATH}/src:${GOPATH}/src/github.com/gogo/protobuf"
 protoc -I=$proto_imports --go_out=$go_output `find ../api/protobuf/sonic -name "*.proto" ! -name "yext.proto" ! -name "ywrapper.proto" | xargs echo`

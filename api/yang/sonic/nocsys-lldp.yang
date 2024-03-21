@@ -1,20 +1,20 @@
-module nocsys-lldp {
+module accton-lldp {
 
   yang-version 1.1;
 
-  namespace "http://github.com/nocsys/sonic-yang/nocsys-lldp";
+  namespace "http://github.com/accton/sonic-yang/accton-lldp";
   prefix lldp;
 
   import ietf-yang-types {
     prefix yang;
   }
 
-  import nocsys-types {
+  import accton-types {
     prefix stypes;
     revision-date 2021-02-22;
   }
 
-  import nocsys-port {
+  import accton-port {
     prefix port;
     revision-date 2021-02-22;
   }
@@ -25,14 +25,14 @@ module nocsys-lldp {
     description "First Revision";
   }
 
-  container nocsys-lldp {
+  container accton-lldp {
     container lldp {
       list lldp-list {
         key "port-name";
         
         leaf port-name {
           type leafref {
-            path /port:nocsys-port/port:port/port:port-list/port:port-name;
+            path /port:accton-port/port:port/port:port-list/port:port-name;
           }
         }
         

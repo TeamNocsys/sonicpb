@@ -1,8 +1,8 @@
-module nocsys-ntp {
+module accton-ntp {
 
   yang-version 1.1;
 
-  namespace "http://github.com/nocsys/sonic-yang/nocsys-ntp";
+  namespace "http://github.com/accton/sonic-yang/accton-ntp";
   prefix ntp;
 
   import ietf-inet-types {
@@ -13,7 +13,7 @@ module nocsys-ntp {
     description "First Revision";
   }
 
-  container nocsys-ntp {
+  container accton-ntp {
     container ntp {
       list ntp-list {
         key "ip";

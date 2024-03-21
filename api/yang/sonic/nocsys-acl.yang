@@ -1,8 +1,8 @@
-module nocsys-acl {
+module accton-acl {
 
   yang-version 1.1;
 
-  namespace "http://github.com/nocsys/sonic-yang/nocsys-acl";
+  namespace "http://github.com/accton/sonic-yang/accton-acl";
   prefix acl;
 
   import ietf-yang-types {
@@ -13,17 +13,17 @@ module nocsys-acl {
     prefix inet;
   }
 
-  import nocsys-types {
+  import accton-types {
     prefix stypes;
     revision-date 2021-02-22;
   }
 
-  import nocsys-port {
+  import accton-port {
     prefix port;
     revision-date 2021-02-22;
   }
 
-  import nocsys-portchannel {
+  import accton-portchannel {
     prefix lag;
     revision-date 2021-02-22;
   }
@@ -32,14 +32,14 @@ module nocsys-acl {
     description "First Revision";
   }
 
-  container nocsys-acl {
+  container accton-acl {
     container acl-rule {
       list acl-rule-list {
         key "table-name rule-name";
         
         leaf table-name {
           type leafref {
-            path "/acl:nocsys-acl/acl:acl-table/acl:acl-table-list/acl:table-name";
+            path "/acl:accton-acl/acl:acl-table/acl:acl-table-list/acl:table-name";
           }
         }
         
@@ -155,13 +155,13 @@ module nocsys-acl {
         
         leaf-list in-ports {
           type leafref {
-            path /port:nocsys-port/port:port/port:port-list/port:port-name;
+            path /port:accton-port/port:port/port:port-list/port:port-name;
           }
         }
         
         leaf-list out-ports {
           type leafref {
-            path /port:nocsys-port/port:port/port:port-list/port:port-name;
+            path /port:accton-port/port:port/port:port-list/port:port-name;
           }
         }
       }
@@ -203,10 +203,10 @@ module nocsys-acl {
         leaf-list ports {
           type union {
             type leafref {
-              path /port:nocsys-port/port:port/port:port-list/port:port-name;
+              path /port:accton-port/port:port/port:port-list/port:port-name;
             }
             type leafref {
-              path /lag:nocsys-portchannel/lag:portchannel/lag:portchannel-list/lag:portchannel-name;
+              path /lag:accton-portchannel/lag:portchannel/lag:portchannel-list/lag:portchannel-name;
             }
           }
         }

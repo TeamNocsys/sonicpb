@@ -1,20 +1,20 @@
-module nocsys-loopback-interface {
+module accton-loopback-interface {
 
   yang-version 1.1;
 
-  namespace "http://github.com/nocsys/sonic-yang/nocsys-loopback-interface";
+  namespace "http://github.com/accton/sonic-yang/accton-loopback-interface";
   prefix lointf;
 
   import ietf-inet-types {
     prefix inet;
   }
 
-  import nocsys-types {
+  import accton-types {
     prefix stypes;
     revision-date 2021-02-22;
   }
 
-  import nocsys-vrf {
+  import accton-vrf {
     prefix vrf;
 	revision-date 2021-02-22;
   }
@@ -23,7 +23,7 @@ module nocsys-loopback-interface {
     description "First Revision";
   }
     
-  container nocsys-loopback-interface {
+  container accton-loopback-interface {
     container loopback-interface {
       list loopback-interface-list {
         key "loopback-interface-name";
@@ -34,7 +34,7 @@ module nocsys-loopback-interface {
         
         leaf vrf-name {
           type leafref {
-            path /vrf:nocsys-vrf/vrf:vrf/vrf:vrf-list/vrf:vrf-name;
+            path /vrf:accton-vrf/vrf:vrf/vrf:vrf-list/vrf:vrf-name;
           }
         }
       }
@@ -48,8 +48,8 @@ module nocsys-loopback-interface {
         
         leaf ip-prefix {
           type union {
-            type stypes:nocsys-ip4-prefix;
-            type stypes:nocsys-ip6-prefix;
+            type stypes:accton-ip4-prefix;
+            type stypes:accton-ip6-prefix;
           }
         }
         

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.nocsys</groupId>
+    <groupId>com.accton</groupId>
     <artifactId>sonicpb</artifactId>
     <version>1.0.0</version>
     <packaging>bundle</packaging>
@@ -41,7 +41,7 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Export-Package>com.nocsys.sonic.*;yext.*;ywrapper.*;com.google.protobuf.*</Export-Package>
+                        <Export-Package>com.accton.sonic.*;yext.*;ywrapper.*;com.google.protobuf.*</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>

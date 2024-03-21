@@ -1,8 +1,8 @@
-module nocsys-interface {
+module accton-interface {
 
   yang-version 1.1;
 
-  namespace "http://github.com/nocsys/sonic-yang/nocsys-interface";
+  namespace "http://github.com/accton/sonic-yang/accton-interface";
   prefix intf;
 
   import ietf-yang-types {
@@ -13,17 +13,17 @@ module nocsys-interface {
     prefix inet;
   }
 
-  import nocsys-types {
+  import accton-types {
     prefix stypes;
     revision-date 2021-02-22;
   }
 
-  import nocsys-port {
+  import accton-port {
     prefix port;
     revision-date 2021-02-22;
   }
   
-  import nocsys-vrf {
+  import accton-vrf {
     prefix vrf;
     revision-date 2021-02-22;
   }
@@ -34,20 +34,20 @@ module nocsys-interface {
     description "First Revision";
   }
 
-  container nocsys-interface {
+  container accton-interface {
     container interface {
       list interface-list {
         key "port-name";
         
         leaf port-name {
           type leafref {
-            path /port:nocsys-port/port:port/port:port-list/port:port-name;
+            path /port:accton-port/port:port/port:port-list/port:port-name;
           }
         }
         
         leaf vrf-name {
           type leafref {
-            path /vrf:nocsys-vrf/vrf:vrf/vrf:vrf-list/vrf:vrf-name;
+            path /vrf:accton-vrf/vrf:vrf/vrf:vrf-list/vrf:vrf-name;
           }
         }
       }
@@ -57,14 +57,14 @@ module nocsys-interface {
 
         leaf port-name {
           type leafref {
-            path /port:nocsys-port/port:port/port:port-list/port:port-name;
+            path /port:accton-port/port:port/port:port-list/port:port-name;
           }
         }
         
         leaf ip-prefix {
           type union {
-            type stypes:nocsys-ip4-prefix;
-            type stypes:nocsys-ip6-prefix;
+            type stypes:accton-ip4-prefix;
+            type stypes:accton-ip6-prefix;
           }
         }
         
