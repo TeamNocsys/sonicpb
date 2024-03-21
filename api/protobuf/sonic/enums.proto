@@ -2,95 +2,96 @@
 // representation of a YANG schema.
 //
 // Input schema modules:
-//  - ../api/yang/sonic/nocsys-fdb.yang
-//  - ../api/yang/sonic/nocsys-ntp.yang
-//  - ../api/yang/sonic/nocsys-todo.yang
 //  - ../api/yang/sonic/nocsys-types.yang
-//  - ../api/yang/sonic/nocsys-route.yang
-//  - ../api/yang/sonic/nocsys-system.yang
-//  - ../api/yang/sonic/nocsys-extension.yang
-//  - ../api/yang/sonic/nocsys-loopback-interface.yang
-//  - ../api/yang/sonic/nocsys-portchannel.yang
-//  - ../api/yang/sonic/nocsys-vlan.yang
-//  - ../api/yang/sonic/nocsys-port.yang
-//  - ../api/yang/sonic/nocsys-platform-types.yang
-//  - ../api/yang/sonic/nocsys-mirror-session.yang
-//  - ../api/yang/sonic/nocsys-vrf.yang
-//  - ../api/yang/sonic/third_party/openconfig/openconfig-extensions.yang
-//  - ../api/yang/sonic/third_party/openconfig/openconfig-types.yang
-//  - ../api/yang/sonic/third_party/ietf/ietf-yang-types.yang
-//  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
-//  - ../api/yang/sonic/third_party/ietf/iana-if-type.yang
-//  - ../api/yang/sonic/third_party/ietf/ietf-interfaces.yang
-//  - ../api/yang/sonic/nocsys-neighbor.yang
-//  - ../api/yang/sonic/nocsys-acl.yang
-//  - ../api/yang/sonic/nocsys-vxlan.yang
-//  - ../api/yang/sonic/nocsys-platform.yang
 //  - ../api/yang/sonic/nocsys-interface.yang
+//  - ../api/yang/sonic/nocsys-vlan.yang
+//  - ../api/yang/sonic/nocsys-mdns.yang
+//  - ../api/yang/sonic/nocsys-extension.yang
+//  - ../api/yang/sonic/nocsys-acl.yang
+//  - ../api/yang/sonic/nocsys-loopback-interface.yang
+//  - ../api/yang/sonic/nocsys-vrf.yang
+//  - ../api/yang/sonic/nocsys-portchannel.yang
+//  - ../api/yang/sonic/nocsys-system.yang
+//  - ../api/yang/sonic/nocsys-neighbor.yang
+//  - ../api/yang/sonic/nocsys-vxlan.yang
+//  - ../api/yang/sonic/nocsys-port.yang
+//  - ../api/yang/sonic/nocsys-route.yang
+//  - ../api/yang/sonic/nocsys-ntp.yang
+//  - ../api/yang/sonic/nocsys-fdb.yang
+//  - ../api/yang/sonic/nocsys-platform-types.yang
+//  - ../api/yang/sonic/nocsys-platform.yang
 //  - ../api/yang/sonic/nocsys-lldp.yang
+//  - ../api/yang/sonic/nocsys-mirror-session.yang
+//  - ../api/yang/sonic/third_party/ietf/ietf-inet-types.yang
+//  - ../api/yang/sonic/third_party/ietf/ietf-yang-types.yang
+//  - ../api/yang/sonic/third_party/ietf/ietf-interfaces.yang
+//  - ../api/yang/sonic/third_party/ietf/iana-if-type.yang
+//  - ../api/yang/sonic/third_party/openconfig/openconfig-types.yang
+//  - ../api/yang/sonic/third_party/openconfig/openconfig-extensions.yang
+//  - ../api/yang/sonic/nocsys-todo.yang
 syntax = "proto3";
 
 package sonic;
-option java_package = "com.nocsys.sonic";
+option java_package = "com.accton.sonic";
 option go_package = ".;sonic";
 
 import "ywrapper.proto";
 import "yext.proto";
 
-// NocsysPlatformTypesSONICHARDWARECOMPONENT represents an enumerated type generated for the YANG identity SONIC_HARDWARE_COMPONENT.
-enum NocsysPlatformTypesSONICHARDWARECOMPONENT {
-  NOCSYSPLATFORMTYPESSONICHARDWARECOMPONENT_UNSET = 0;
-  NOCSYSPLATFORMTYPESSONICHARDWARECOMPONENT_POWER_SUPPLY = 137023917 [(yext.yang_name) = "POWER_SUPPLY"];
-  NOCSYSPLATFORMTYPESSONICHARDWARECOMPONENT_SENSOR = 375588988 [(yext.yang_name) = "SENSOR"];
-  NOCSYSPLATFORMTYPESSONICHARDWARECOMPONENT_FAN = 424176681 [(yext.yang_name) = "FAN"];
+// AcctonPlatformTypesSONICHARDWARECOMPONENT represents an enumerated type generated for the YANG identity SONIC_HARDWARE_COMPONENT.
+enum AcctonPlatformTypesSONICHARDWARECOMPONENT {
+  ACCTONPLATFORMTYPESSONICHARDWARECOMPONENT_UNSET = 0;
+  ACCTONPLATFORMTYPESSONICHARDWARECOMPONENT_POWER_SUPPLY = 137023917 [(yext.yang_name) = "POWER_SUPPLY"];
+  ACCTONPLATFORMTYPESSONICHARDWARECOMPONENT_SENSOR = 375588988 [(yext.yang_name) = "SENSOR"];
+  ACCTONPLATFORMTYPESSONICHARDWARECOMPONENT_FAN = 424176681 [(yext.yang_name) = "FAN"];
 }
 
-// NocsysPlatformTypesSONICSOFTWARECOMPONENT represents an enumerated type generated for the YANG identity SONIC_SOFTWARE_COMPONENT.
-enum NocsysPlatformTypesSONICSOFTWARECOMPONENT {
-  NOCSYSPLATFORMTYPESSONICSOFTWARECOMPONENT_UNSET = 0;
-  NOCSYSPLATFORMTYPESSONICSOFTWARECOMPONENT_OPERATING_SYSTEM = 527639718 [(yext.yang_name) = "OPERATING_SYSTEM"];
+// AcctonPlatformTypesSONICSOFTWARECOMPONENT represents an enumerated type generated for the YANG identity SONIC_SOFTWARE_COMPONENT.
+enum AcctonPlatformTypesSONICSOFTWARECOMPONENT {
+  ACCTONPLATFORMTYPESSONICSOFTWARECOMPONENT_UNSET = 0;
+  ACCTONPLATFORMTYPESSONICSOFTWARECOMPONENT_OPERATING_SYSTEM = 527639718 [(yext.yang_name) = "OPERATING_SYSTEM"];
 }
 
-// NocsysTypesAdminStatus represents an enumerated type generated for the YANG enumerated type admin-status.
-enum NocsysTypesAdminStatus {
-  NOCSYSTYPESADMINSTATUS_UNSET = 0;
-  NOCSYSTYPESADMINSTATUS_up = 1 [(yext.yang_name) = "up"];
-  NOCSYSTYPESADMINSTATUS_down = 2 [(yext.yang_name) = "down"];
+// AcctonTypesAdminStatus represents an enumerated type generated for the YANG enumerated type admin-status.
+enum AcctonTypesAdminStatus {
+  ACCTONTYPESADMINSTATUS_UNSET = 0;
+  ACCTONTYPESADMINSTATUS_up = 1 [(yext.yang_name) = "up"];
+  ACCTONTYPESADMINSTATUS_down = 2 [(yext.yang_name) = "down"];
 }
 
-// NocsysTypesIpFamily represents an enumerated type generated for the YANG enumerated type ip-family.
-enum NocsysTypesIpFamily {
-  NOCSYSTYPESIPFAMILY_UNSET = 0;
-  NOCSYSTYPESIPFAMILY_IPv4 = 1 [(yext.yang_name) = "IPv4"];
-  NOCSYSTYPESIPFAMILY_IPv6 = 2 [(yext.yang_name) = "IPv6"];
+// AcctonTypesIpFamily represents an enumerated type generated for the YANG enumerated type ip-family.
+enum AcctonTypesIpFamily {
+  ACCTONTYPESIPFAMILY_UNSET = 0;
+  ACCTONTYPESIPFAMILY_IPv4 = 1 [(yext.yang_name) = "IPv4"];
+  ACCTONTYPESIPFAMILY_IPv6 = 2 [(yext.yang_name) = "IPv6"];
 }
 
-// NocsysTypesIpType represents an enumerated type generated for the YANG enumerated type ip-type.
-enum NocsysTypesIpType {
-  NOCSYSTYPESIPTYPE_UNSET = 0;
-  NOCSYSTYPESIPTYPE_ANY = 1 [(yext.yang_name) = "ANY"];
-  NOCSYSTYPESIPTYPE_IP = 2 [(yext.yang_name) = "IP"];
-  NOCSYSTYPESIPTYPE_NON_IP = 3 [(yext.yang_name) = "NON_IP"];
-  NOCSYSTYPESIPTYPE_IPV4 = 4 [(yext.yang_name) = "IPV4"];
-  NOCSYSTYPESIPTYPE_IPV6 = 5 [(yext.yang_name) = "IPV6"];
-  NOCSYSTYPESIPTYPE_IPv4ANY = 6 [(yext.yang_name) = "IPv4ANY"];
-  NOCSYSTYPESIPTYPE_NON_IP4 = 7 [(yext.yang_name) = "NON_IP4"];
-  NOCSYSTYPESIPTYPE_IPv6ANY = 8 [(yext.yang_name) = "IPv6ANY"];
-  NOCSYSTYPESIPTYPE_NON_IPv6 = 9 [(yext.yang_name) = "NON_IPv6"];
-  NOCSYSTYPESIPTYPE_ARP = 10 [(yext.yang_name) = "ARP"];
+// AcctonTypesIpType represents an enumerated type generated for the YANG enumerated type ip-type.
+enum AcctonTypesIpType {
+  ACCTONTYPESIPTYPE_UNSET = 0;
+  ACCTONTYPESIPTYPE_ANY = 1 [(yext.yang_name) = "ANY"];
+  ACCTONTYPESIPTYPE_IP = 2 [(yext.yang_name) = "IP"];
+  ACCTONTYPESIPTYPE_NON_IP = 3 [(yext.yang_name) = "NON_IP"];
+  ACCTONTYPESIPTYPE_IPV4 = 4 [(yext.yang_name) = "IPV4"];
+  ACCTONTYPESIPTYPE_IPV6 = 5 [(yext.yang_name) = "IPV6"];
+  ACCTONTYPESIPTYPE_IPv4ANY = 6 [(yext.yang_name) = "IPv4ANY"];
+  ACCTONTYPESIPTYPE_NON_IP4 = 7 [(yext.yang_name) = "NON_IP4"];
+  ACCTONTYPESIPTYPE_IPv6ANY = 8 [(yext.yang_name) = "IPv6ANY"];
+  ACCTONTYPESIPTYPE_NON_IPv6 = 9 [(yext.yang_name) = "NON_IPv6"];
+  ACCTONTYPESIPTYPE_ARP = 10 [(yext.yang_name) = "ARP"];
 }
 
-// NocsysTypesOperStatus represents an enumerated type generated for the YANG enumerated type oper-status.
-enum NocsysTypesOperStatus {
-  NOCSYSTYPESOPERSTATUS_UNSET = 0;
-  NOCSYSTYPESOPERSTATUS_up = 1 [(yext.yang_name) = "up"];
-  NOCSYSTYPESOPERSTATUS_down = 2 [(yext.yang_name) = "down"];
+// AcctonTypesOperStatus represents an enumerated type generated for the YANG enumerated type oper-status.
+enum AcctonTypesOperStatus {
+  ACCTONTYPESOPERSTATUS_UNSET = 0;
+  ACCTONTYPESOPERSTATUS_up = 1 [(yext.yang_name) = "up"];
+  ACCTONTYPESOPERSTATUS_down = 2 [(yext.yang_name) = "down"];
 }
 
-// NocsysTypesPacketAction represents an enumerated type generated for the YANG enumerated type packet-action.
-enum NocsysTypesPacketAction {
-  NOCSYSTYPESPACKETACTION_UNSET = 0;
-  NOCSYSTYPESPACKETACTION_DROP = 1 [(yext.yang_name) = "DROP"];
-  NOCSYSTYPESPACKETACTION_FORWARD = 2 [(yext.yang_name) = "FORWARD"];
-  NOCSYSTYPESPACKETACTION_REDIRECT = 3 [(yext.yang_name) = "REDIRECT"];
+// AcctonTypesPacketAction represents an enumerated type generated for the YANG enumerated type packet-action.
+enum AcctonTypesPacketAction {
+  ACCTONTYPESPACKETACTION_UNSET = 0;
+  ACCTONTYPESPACKETACTION_DROP = 1 [(yext.yang_name) = "DROP"];
+  ACCTONTYPESPACKETACTION_FORWARD = 2 [(yext.yang_name) = "FORWARD"];
+  ACCTONTYPESPACKETACTION_REDIRECT = 3 [(yext.yang_name) = "REDIRECT"];
 }
